@@ -43,52 +43,62 @@ export const DiceRoller: React.FC<DiceRollerProps> = ({
   };
 
   return (
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 text-center z-10 flex flex-col items-center pointer-events-auto">
-      <div className="font-serif tracking-widest text-xs text-[#9aa1ad] mb-2 uppercase font-medium">
-        ✦ Lempar Dadu ✦
-      </div>
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-72 text-center z-20 flex flex-col items-center pointer-events-auto">
+      <div className="bg-[#151922]/90 border border-[#2e3748] backdrop-blur-md p-4 rounded-2xl shadow-2xl w-full flex flex-col items-center">
+        {/* Header Eyebrow */}
+        <div className="text-[10px] font-bold text-[#c9a13b] uppercase tracking-widest mb-2.5 flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#c9a13b] animate-ping" />
+          <span>Konsol Komando Dadu</span>
+        </div>
 
-      {/* Die Face */}
-      <div className="mb-3 flex items-center justify-center">
-        <div
-          className={`w-14 h-14 rounded-xl bg-[#2f3540] border-2 border-[#c9a13b] flex items-center justify-center font-mono font-bold text-2xl text-[#eae6da] shadow-lg shadow-black/50 transition-transform ${
-            isRolling ? 'rotate-12 scale-110 animate-bounce' : ''
+        {/* Die Face */}
+        <div className="mb-3 flex items-center justify-center">
+          <div
+            className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-[#2a3240] to-[#1a1f29] border-2 border-[#c9a13b] flex items-center justify-center font-mono font-bold text-2xl text-[#f4ecd8] shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-all ${
+              isRolling ? 'rotate-45 scale-110 shadow-[0_0_25px_rgba(201,161,59,0.5)]' : ''
+            }`}
+          >
+            {state.activeDice && !isRolling ? state.activeDice : displayValue}
+          </div>
+        </div>
+
+        {/* Roll Button */}
+        <button
+          type="button"
+          disabled={!canRoll}
+          onClick={handleRollClick}
+          className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md ${
+            canRoll
+              ? 'bg-gradient-to-r from-[#c9a13b] to-[#deb447] text-[#14171d] hover:brightness-110 active:scale-98 cursor-pointer shadow-[0_0_15px_rgba(201,161,59,0.4)]'
+              : 'bg-[#262c37] border border-[#373f4e] text-[#848d9c] cursor-not-allowed opacity-60'
           }`}
         >
-          {state.activeDice && !isRolling ? state.activeDice : displayValue}
+          {isRolling ? 'Mengocok Dadu...' : canRoll ? 'Lempar Dadu' : 'Menunggu Giliran'}
+        </button>
+
+        {/* Turn Status Pill */}
+        <div className="mt-3 w-full pt-2.5 border-t border-[#2a3240] flex items-center justify-between text-xs">
+          <span className="text-[11px] text-[#848d9c]">Giliran Aktif:</span>
+          <div className="flex items-center gap-1.5">
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: currentTeam?.colorHex }}
+            />
+            <span
+              className="font-bold text-[11px]"
+              style={{ color: currentTeam?.colorHex }}
+            >
+              {currentTeam?.name}
+            </span>
+          </div>
         </div>
+
+        {!isMyTurn && state.phase === 'ROLL' && !state.gameOver && (
+          <span className="text-[10px] text-zinc-400 mt-1 italic">
+            (Menunggu {currentTeam?.name} melempar dadu...)
+          </span>
+        )}
       </div>
-
-      {/* Roll Button */}
-      <button
-        type="button"
-        disabled={!canRoll}
-        onClick={handleRollClick}
-        className={`font-semibold text-sm px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md ${
-          canRoll
-            ? 'bg-[#c9a13b] text-[#1c1f26] hover:bg-[#deb447] active:scale-95 cursor-pointer hover:shadow-lg hover:shadow-[#c9a13b]/20 font-bold'
-            : 'bg-[#3a4150] text-[#9aa1ad] opacity-60 cursor-not-allowed'
-        }`}
-      >
-        {isRolling ? 'Mengocok...' : 'Lempar Dadu'}
-      </button>
-
-      {/* Turn Indicator */}
-      <div className="mt-2 text-xs text-[#9aa1ad] flex items-center gap-1.5">
-        <span>Giliran:</span>
-        <span
-          className="font-bold font-serif"
-          style={{ color: currentTeam?.colorHex }}
-        >
-          {currentTeam?.name}
-        </span>
-      </div>
-
-      {!isMyTurn && state.phase === 'ROLL' && !state.gameOver && (
-        <span className="text-[10px] text-zinc-400 mt-1 italic">
-          (Menunggu giliran pemain...)
-        </span>
-      )}
     </div>
   );
 };

@@ -186,6 +186,8 @@ export default function RoomPage({
       ? room.gameState.teams[currentActiveTeamId].position
       : null;
 
+  const [isMoving, setIsMoving] = useState(false);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#1c1f26] flex items-center justify-center text-[#eae6da]">
@@ -452,6 +454,7 @@ export default function RoomPage({
             }
           }}
           lastLandedTileIndex={lastLandedTileIndex}
+          onMovingChange={setIsMoving}
         />
 
         {/* History Log */}
@@ -471,35 +474,48 @@ export default function RoomPage({
             });
           }
         }}
-      />
-
-      <BuyPrompt
-        state={room.gameState}
-        isMyTurn={isMyTurn}
-        onDecision={(buy) => {
+        onExecuteMove={() => {
           if (myTeamId) {
             dispatchAction({
-              type: 'BUY_COUNTRY',
+              type: 'EXECUTE_MOVE',
               teamId: myTeamId,
-              payload: { buy },
             });
           }
         }}
       />
 
-      <CongressChoiceModal
-        state={room.gameState}
-        isMyTurn={isMyTurn}
-        onChoice={(choice, countryIndex) => {
-          if (myTeamId) {
-            dispatchAction({
-              type: 'CONGRESS_CHOICE',
-              teamId: myTeamId,
-              payload: { choice, countryIndex },
-            });
-          }
-        }}
-      />
+      {/* Only display buy prompt and congress modal after pawn movement finishes */}
+      {!isMoving && (
+        <>
+          <BuyPrompt
+            state={room.gameState}
+            isMyTurn={isMyTurn}
+            onDecision={(buy) => {
+              if (myTeamId) {
+                dispatchAction({
+                  type: 'BUY_COUNTRY',
+                  teamId: myTeamId,
+                  payload: { buy },
+                });
+              }
+            }}
+          />
+
+          <CongressChoiceModal
+            state={room.gameState}
+            isMyTurn={isMyTurn}
+            onChoice={(choice, countryIndex) => {
+              if (myTeamId) {
+                dispatchAction({
+                  type: 'CONGRESS_CHOICE',
+                  teamId: myTeamId,
+                  payload: { choice, countryIndex },
+                });
+              }
+            }}
+          />
+        </>
+      )}
 
       <EndGameModal
         state={room.gameState}

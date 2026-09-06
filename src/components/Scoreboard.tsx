@@ -31,35 +31,41 @@ export const Scoreboard: React.FC<ScoreboardProps> = ({
             <div
               key={teamId}
               style={{
-                background: `linear-gradient(155deg, ${team.colorHex}25 0%, #262b35 70%)`,
-                borderColor: isActive ? '#c9a13b' : '#3a4150',
+                background: isActive
+                  ? `linear-gradient(155deg, ${team.colorHex}30 0%, #151922 65%)`
+                  : `linear-gradient(155deg, ${team.colorHex}15 0%, #131720 70%)`,
+                borderColor: isActive ? team.colorHex : '#283140',
+                boxShadow: isActive
+                  ? `0 0 20px ${team.colorHex}30, 0 4px 12px rgba(0,0,0,0.5)`
+                  : '0 4px 10px rgba(0,0,0,0.4)',
               }}
-              className={`relative rounded-xl p-3.5 border transition-all duration-300 ${
+              className={`relative rounded-2xl p-4 border backdrop-blur-md transition-all duration-300 ${
                 isActive
-                  ? 'ring-2 ring-[#c9a13b] shadow-lg shadow-[#c9a13b]/20 -translate-y-1'
-                  : 'opacity-90'
+                  ? 'ring-2 ring-[#c9a13b] -translate-y-1'
+                  : 'opacity-90 hover:opacity-100 hover:border-[#3a475c]'
               } ${team.bankrupt ? 'opacity-40 grayscale' : ''}`}
             >
               {/* Turn & Status Badges */}
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-2.5">
                 <div className="flex items-center gap-1.5 flex-wrap">
                   {isActive && (
-                    <span className="bg-[#c9a13b] text-[#1c1f26] font-bold text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-full animate-pulse">
-                      Giliran
+                    <span className="bg-gradient-to-r from-[#c9a13b] to-[#deb447] text-[#14171d] font-bold text-[10px] tracking-wider uppercase px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#14171d] animate-ping" />
+                      <span>Giliran</span>
                     </span>
                   )}
                   {isYou && (
-                    <span className="bg-[#3b82f6] text-white font-bold text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-full">
+                    <span className="bg-cyan-600 text-white font-bold text-[10px] tracking-wider uppercase px-2 py-0.5 rounded-full shadow-sm">
                       Anda
                     </span>
                   )}
                   {team.isNeutral && (
-                    <span className="bg-[#4b5563] text-zinc-300 font-medium text-[10px] px-2 py-0.5 rounded-full">
-                      Netral (tidak dimainkan)
+                    <span className="bg-[#2f3746] text-zinc-300 font-medium text-[10px] px-2 py-0.5 rounded-full border border-white/5">
+                      Netral
                     </span>
                   )}
                   {team.bankrupt && (
-                    <span className="bg-[#ef4444] text-white font-bold text-[10px] uppercase px-2 py-0.5 rounded-full">
+                    <span className="bg-rose-600 text-white font-bold text-[10px] uppercase px-2 py-0.5 rounded-full">
                       Bangkrut
                     </span>
                   )}
@@ -70,25 +76,25 @@ export const Scoreboard: React.FC<ScoreboardProps> = ({
               {/* Team Name and Role */}
               <div className="flex items-center gap-2 mb-1">
                 <span
-                  className="w-3 h-3 rounded-full shrink-0 shadow-sm"
+                  className="w-3.5 h-3.5 rounded-full shrink-0 shadow-sm border border-white/20"
                   style={{ backgroundColor: team.colorHex }}
                 />
-                <h3 className="font-serif font-bold text-base text-[#eae6da] truncate">
+                <h3 className="font-serif font-bold text-base text-[#f4ecd8] truncate">
                   {team.name}
                 </h3>
               </div>
-              <p className="text-[11px] text-[#9aa1ad] truncate mb-3">
+              <p className="text-[11px] text-[#848d9c] truncate mb-3">
                 {team.role}
               </p>
 
-              {/* Financial Stats */}
-              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#3a4150]/60">
+              {/* Financial Stats Grid */}
+              <div className="grid grid-cols-2 gap-2 pt-2.5 border-t border-[#232a37]">
                 <div>
-                  <span className="text-[10px] text-[#9aa1ad] uppercase tracking-wide block">
+                  <span className="text-[9.5px] text-[#848d9c] uppercase tracking-wider block font-semibold">
                     Kas Tunai
                   </span>
                   <span
-                    className={`font-mono font-bold text-lg leading-tight ${
+                    className={`font-mono font-bold text-base sm:text-lg leading-tight ${
                       team.cash < 200 ? 'text-amber-400' : 'text-emerald-400'
                     }`}
                   >
@@ -96,19 +102,19 @@ export const Scoreboard: React.FC<ScoreboardProps> = ({
                   </span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-[#9aa1ad] uppercase tracking-wide block">
-                    Kekayaan Total
+                  <span className="text-[9.5px] text-[#848d9c] uppercase tracking-wider block font-semibold">
+                    Total Aset
                   </span>
-                  <span className="font-mono font-bold text-lg text-[#eae6da] leading-tight">
+                  <span className="font-mono font-bold text-base sm:text-lg text-[#eae6da] leading-tight">
                     ${netWorth.toLocaleString()}
                   </span>
                 </div>
               </div>
 
               {/* Territory Count */}
-              <div className="mt-2 text-[11.5px] text-[#9aa1ad] flex items-center justify-between">
-                <span>Wilayah Dikuasai:</span>
-                <span className="font-semibold text-[#eae6da] bg-[#1c1f26]/60 px-2 py-0.5 rounded border border-[#3a4150]/40">
+              <div className="mt-2.5 text-[11.5px] text-[#848d9c] flex items-center justify-between pt-1 border-t border-[#232a37]/50">
+                <span className="text-[11px]">Wilayah Dikuasai:</span>
+                <span className="font-mono font-bold text-xs text-[#f4ecd8] bg-black/40 px-2.5 py-0.5 rounded-lg border border-white/5">
                   {ownedCount} negara
                 </span>
               </div>

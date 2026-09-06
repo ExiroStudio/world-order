@@ -38,41 +38,47 @@ export const CongressChoiceModal: React.FC<CongressChoiceModalProps> = ({
     pending.tributeAmountPerOpponent * activeOpponents.length;
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
-      <div className="bg-[#262b35] border border-red-500/70 rounded-2xl max-w-lg w-full p-6 shadow-2xl text-[#eae6da] relative">
-        <div className="text-xs font-bold text-red-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-          <span>⚠️ Sanksi Kongres Dunia (Gerak Mundur)</span>
+    <div className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
+      <div className="bg-[#151922]/95 border border-rose-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl text-[#eae6da] relative">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-3 pb-3 border-b border-[#252c38]">
+          <div className="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
+            <span>Sanksi Konstitusi Kongres Dunia</span>
+          </div>
+          <span className="text-xs font-mono bg-rose-950/50 border border-rose-500/40 text-rose-300 px-2 py-0.5 rounded-md">
+            Gerak Mundur
+          </span>
         </div>
 
         <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#f4ecd8] mb-2">
           Pilihan Pertanggungjawaban
         </h3>
 
-        <p className="text-xs text-[#9aa1ad] leading-relaxed mb-5">
-          {team.name} melewati Kongres Dunia akibat jawaban salah. Sesuai
-          konstitusi dunia, Anda wajib memilih salah satu opsi berikut:
+        <p className="text-xs text-[#848d9c] leading-relaxed mb-5">
+          {team.name} melewati Kongres Dunia akibat jawaban salah. Pilih salah satu klausul penyelesaian berikut:
         </p>
 
-        {/* Option A: Tribute */}
-        <div className="p-4 rounded-xl bg-[#1c1f26] border border-[#3a4150] mb-4 hover:border-[#c9a13b]/50 transition-colors">
+        {/* Option A: Tribute Deck */}
+        <div className="p-4 rounded-2xl bg-[#1a202c] border border-[#2b3546] mb-4 hover:border-[#c9a13b]/60 transition-colors shadow-sm">
           <div className="flex items-start justify-between gap-2 mb-2">
             <div>
-              <h4 className="font-bold text-sm text-[#eae6da]">
-                Opsi A: Bayar Upeti Diplomatik
+              <h4 className="font-bold text-sm text-[#f4ecd8]">
+                Klausul A: Bayar Upeti Diplomatik
               </h4>
-              <p className="text-xs text-[#9aa1ad] mt-0.5">
-                Bayar ${pending.tributeAmountPerOpponent} ke setiap dari{' '}
-                {activeOpponents.length} ideologi lawan.
+              <p className="text-xs text-[#848d9c] mt-0.5 leading-snug">
+                Bayar ${pending.tributeAmountPerOpponent} ke masing-masing dari{' '}
+                {activeOpponents.length} ideologi lawan aktif.
               </p>
             </div>
-            <span className="font-mono font-bold text-red-400 text-sm">
+            <span className="font-mono font-bold text-rose-400 text-sm bg-black/40 px-2 py-0.5 rounded-lg border border-rose-500/30">
               -${totalTribute}
             </span>
           </div>
 
           {team.id === 'fasisme' && (
-            <div className="text-[11px] text-amber-400 mb-2">
-              ✦ Perk Ekspansi Paksa: Anda hanya membayar 50% upeti normal!
+            <div className="text-[11px] text-amber-400 my-1.5 font-medium">
+              ✦ Perk Ekspansi Paksa: Hanya menanggung 50% upeti normal!
             </div>
           )}
 
@@ -80,20 +86,19 @@ export const CongressChoiceModal: React.FC<CongressChoiceModalProps> = ({
             type="button"
             disabled={!isMyTurn}
             onClick={() => onChoice('tribute')}
-            className="w-full mt-2 py-2 px-4 rounded-lg bg-[#3a4150] hover:bg-[#4b5563] text-white font-semibold text-xs transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full mt-2 py-2.5 px-4 rounded-xl bg-[#262e3d] hover:bg-[#323d50] border border-[#3b475c] text-white font-semibold text-xs uppercase tracking-wider transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Pilih Bayar Upeti (${totalTribute})
           </button>
         </div>
 
-        {/* Option B: Sell Country */}
-        <div className="p-4 rounded-xl bg-[#1c1f26] border border-[#3a4150]">
-          <h4 className="font-bold text-sm text-[#eae6da] mb-1">
-            Opsi B: Lepas / Jual 1 Negara ke Bank
+        {/* Option B: Sell Country Deck */}
+        <div className="p-4 rounded-2xl bg-[#1a202c] border border-[#2b3546] shadow-sm">
+          <h4 className="font-bold text-sm text-[#f4ecd8] mb-1">
+            Klausul B: Lepas / Jual 1 Wilayah ke Bank
           </h4>
-          <p className="text-xs text-[#9aa1ad] mb-3">
-            Pilih 1 wilayah untuk dikembalikan ke bank. Anda akan menerima
-            kompensasi 50% dari harga beli.
+          <p className="text-xs text-[#848d9c] mb-3 leading-snug">
+            Kembalikan 1 negara yang dikuasai untuk menerima dana likuidasi 50%.
           </p>
 
           <div className="max-h-36 overflow-y-auto space-y-1.5 mb-3 pr-1">
@@ -109,10 +114,10 @@ export const CongressChoiceModal: React.FC<CongressChoiceModalProps> = ({
                   key={idx}
                   type="button"
                   onClick={() => setSelectedCountryIdx(idx)}
-                  className={`w-full text-left p-2 rounded-lg border text-xs flex items-center justify-between transition-colors ${
+                  className={`w-full text-left p-2.5 rounded-xl border text-xs flex items-center justify-between transition-colors ${
                     isSelected
-                      ? 'bg-[#c9a13b]/20 border-[#c9a13b] text-[#eae6da]'
-                      : 'bg-[#262b35] border-[#3a4150] text-[#9aa1ad] hover:text-[#eae6da]'
+                      ? 'bg-[#c9a13b]/20 border-[#c9a13b] text-[#f4ecd8] shadow-sm'
+                      : 'bg-[#151922] border-[#2b3546] text-[#848d9c] hover:text-[#eae6da] hover:border-[#3a475c]'
                   }`}
                 >
                   <span className="font-medium">{tile.name}</span>
@@ -131,14 +136,14 @@ export const CongressChoiceModal: React.FC<CongressChoiceModalProps> = ({
               selectedCountryIdx !== null &&
               onChoice('sell', selectedCountryIdx)
             }
-            className="w-full py-2 px-4 rounded-lg bg-[#c9a13b] hover:bg-[#deb447] text-[#1c1f26] font-bold text-xs transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shadow-md"
+            className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#c9a13b] to-[#deb447] text-[#14171d] font-bold text-xs uppercase tracking-wider transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed shadow-md"
           >
             Lepas Wilayah Terpilih
           </button>
         </div>
 
         {!isMyTurn && (
-          <div className="mt-4 text-center text-xs text-[#9aa1ad] italic">
+          <div className="mt-4 text-center text-xs text-[#848d9c] italic">
             Menunggu {team.name} menentukan pilihan...
           </div>
         )}

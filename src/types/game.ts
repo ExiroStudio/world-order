@@ -66,6 +66,14 @@ export interface GameLogEntry {
   timestamp: number;
 }
 
+export interface LastMoveInfo {
+  teamId: TeamId;
+  from: number;
+  to: number;
+  isForward: boolean;
+  timestamp: number;
+}
+
 export interface GameState {
   turnIndex: number;
   round: number;
@@ -84,6 +92,7 @@ export interface GameState {
   pendingChoice: PendingChoice | null;
   log: GameLogEntry[];
   usedQuestionIds: number[];
+  lastMove?: LastMoveInfo | null;
 }
 
 export interface RoomPlayer {
@@ -105,6 +114,7 @@ export interface RoomDoc {
 export type ActionType =
   | 'ROLL_DICE'
   | 'ANSWER_QUESTION'
+  | 'EXECUTE_MOVE'
   | 'BUY_COUNTRY'
   | 'CONGRESS_CHOICE';
 

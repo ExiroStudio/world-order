@@ -6,6 +6,7 @@ import {
   initGameState,
   rollDice,
   answerQuestion,
+  executeMove,
   resolveBuyDecision,
   resolveCongressChoice,
 } from '@/lib/gameEngine';
@@ -24,14 +25,19 @@ export default function LocalGamePage() {
   const [lastLandedTileIndex, setLastLandedTileIndex] = useState<number | null>(
     null
   );
+  const [isMoving, setIsMoving] = useState(false);
 
   const handleRollDice = () => {
     setGameState((prev) => rollDice(prev));
   };
 
   const handleAnswerQuestion = (chosenIndex: number) => {
+    setGameState((prev) => answerQuestion(prev, chosenIndex));
+  };
+
+  const handleExecuteMove = () => {
     setGameState((prev) => {
-      const next = answerQuestion(prev, chosenIndex);
+      const next = executeMove(prev);
       const teamId = TEAMS_ORDER[prev.turnIndex];
       setLastLandedTileIndex(next.teams[teamId].position);
       return next;
@@ -52,14 +58,15 @@ export default function LocalGamePage() {
   const handleRestart = () => {
     setGameState(initGameState());
     setLastLandedTileIndex(null);
+    setIsMoving(false);
   };
 
   return (
-    <div className="min-h-screen flex flex-col pb-12 bg-[#1c1f26] text-[#eae6da]">
+    <div className="min-h-screen flex flex-col pb-12 bg-[#0f1217] text-[#eae6da]">
       <Navbar isLocal />
 
       <main className="w-full max-w-5xl mx-auto px-4 flex-1 flex flex-col items-center">
-        {/* Scoreboard */}
+        {/* Scoreboard Command Deck */}
         <Scoreboard state={gameState} />
 
         {/* Board */}
@@ -68,6 +75,7 @@ export default function LocalGamePage() {
           isMyTurn={true} // In local mode, anyone at the screen takes the current turn
           onRollDice={handleRollDice}
           lastLandedTileIndex={lastLandedTileIndex}
+          onMovingChange={setIsMoving}
         />
 
         {/* Log Panel */}
@@ -79,19 +87,25 @@ export default function LocalGamePage() {
         state={gameState}
         isMyTurn={true}
         onAnswer={handleAnswerQuestion}
+        onExecuteMove={handleExecuteMove}
       />
 
-      <BuyPrompt
-        state={gameState}
-        isMyTurn={true}
-        onDecision={handleBuyDecision}
-      />
+      {/* Only display buy prompt and congress modal after pawn movement finishes */}
+      {!isMoving && (
+        <>
+          <BuyPrompt
+            state={gameState}
+            isMyTurn={true}
+            onDecision={handleBuyDecision}
+          />
 
-      <CongressChoiceModal
-        state={gameState}
-        isMyTurn={true}
-        onChoice={handleCongressChoice}
-      />
+          <CongressChoiceModal
+            state={gameState}
+            isMyTurn={true}
+            onChoice={handleCongressChoice}
+          />
+        </>
+      )}
 
       <EndGameModal
         state={gameState}
@@ -100,3 +114,4 @@ export default function LocalGamePage() {
     </div>
   );
 }
+

@@ -80,6 +80,7 @@ export function initGameState(options?: {
       ),
     ],
     usedQuestionIds: [],
+    lastMove: null,
   };
 }
 
@@ -262,9 +263,43 @@ export function answerQuestion(
   const currentTeamId = TEAMS_ORDER[newState.turnIndex];
   const currentTeam = newState.teams[currentTeamId];
   const isCorrect = chosenIndex === q.correct;
+  const rollValue = newState.activeDice || 1;
 
   newState.usedQuestionIds.push(q.id);
   newState.questionAnswered = { chosenIndex, isCorrect };
+
+  if (isCorrect) {
+    newState.log.unshift(
+      createLog(
+        `✔ ${currentTeam.name} menjawab BENAR! Siap maju ${rollValue} langkah.`,
+        currentTeamId
+      )
+    );
+  } else {
+    newState.log.unshift(
+      createLog(
+        `✘ ${currentTeam.name} menjawab SALAH! Siap mundur ${rollValue} langkah. (${q.why})`,
+        currentTeamId
+      )
+    );
+  }
+
+  return newState;
+}
+
+export function executeMove(state: GameState): GameState {
+  if (state.phase !== 'QUESTION' || !state.questionAnswered || state.gameOver) {
+    return state;
+  }
+
+  const newState = structuredClone(state);
+  if (!newState.questionAnswered) {
+    return state;
+  }
+
+  const currentTeamId = TEAMS_ORDER[newState.turnIndex];
+  const currentTeam = newState.teams[currentTeamId];
+  const isCorrect = newState.questionAnswered.isCorrect;
 
   const rollValue = newState.activeDice || 1;
   const beforePos = currentTeam.position;
@@ -281,7 +316,7 @@ export function answerQuestion(
     }
     newState.log.unshift(
       createLog(
-        `✔ ${currentTeam.name} menjawab BENAR! Maju ${rollValue} langkah ke ${TILES[newPos].name}.`,
+        `✔ ${currentTeam.name} melangkah ${rollValue} petak maju ke ${TILES[newPos].name}.`,
         currentTeamId
       )
     );
@@ -294,13 +329,20 @@ export function answerQuestion(
     }
     newState.log.unshift(
       createLog(
-        `✘ ${currentTeam.name} menjawab SALAH! Mundur ${rollValue} langkah ke ${TILES[newPos].name}. (${q.why})`,
+        `✘ ${currentTeam.name} melangkah ${rollValue} petak mundur ke ${TILES[newPos].name}.`,
         currentTeamId
       )
     );
   }
 
   currentTeam.position = newPos;
+  newState.lastMove = {
+    teamId: currentTeamId,
+    from: beforePos,
+    to: newPos,
+    isForward: isCorrect,
+    timestamp: Date.now(),
+  };
 
   // 1. Resolve Congress Pass / Land
   if (passedCongressClockwise) {
@@ -442,7 +484,18 @@ function resolveLandingTile(
     const owner = state.owners[tileIndex];
 
     if (owner === null) {
-      // Country is unowned
+      // Unowned country:
+      // Only players who answered CORRECTLY are allowed to buy!
+      if (!isCorrect) {
+        state.log.unshift(
+          createLog(
+            `✘ Jawaban salah! ${currentTeam.name} hanya melewati ${tile.name} dan tidak diizinkan membeli wilayah ini.`,
+            currentTeamId
+          )
+        );
+        return advanceTurn(state);
+      }
+
       const normalPrice = tile.price || 100;
       let buyPrice = normalPrice;
 
@@ -645,6 +698,10 @@ export function processGameAction(
       if (action.teamId !== currentTeamId) return state;
       if (action.payload?.chosenIndex == null) return state;
       return answerQuestion(state, action.payload.chosenIndex);
+    }
+    case 'EXECUTE_MOVE': {
+      if (action.teamId !== currentTeamId) return state;
+      return executeMove(state);
     }
     case 'BUY_COUNTRY': {
       if (action.teamId !== currentTeamId) return state;
