@@ -1,7 +1,7 @@
 import { TeamDefinition, TeamId } from '@/types/game';
 
 export const GAME_CONFIG = {
-  STARTING_CASH: 1500,
+  STARTING_CASH: 500,
   BASE_RENT_PERCENT: 0.1, // 10%
   CONTINENT_SET_RENT_PERCENT: 0.25, // 25%
   CONGRESS_INCOME_PER_COUNTRY: 50,
