@@ -129,7 +129,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="text-center text-xs text-[#9aa1ad] pt-10 pb-4">
-        World Order • Monopoli Ideologi Dunia • Next.js App Router Rebuild
+        World Order • Monopoli Ideologi Dunia • Kelompok 9
       </footer>
 
       <RulesModal
