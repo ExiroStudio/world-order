@@ -1,26 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #1c1f26;
+  --foreground: #eae6da;
+  --panel: #262b35;
+  --panel-light: #2f3540;
+  --gold: #c9a13b;
+  --line: #3a4150;
+  --muted: #9aa1ad;
+
+  --liberalisme: #2f6db3;
+  --komunisme: #b3312f;
+  --fasisme: #3a3a3a;
+  --kapitalisme: #237a52;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(201, 161, 59, 0.08), transparent 55%),
+    radial-gradient(ellipse at 90% 100%, rgba(47, 109, 179, 0.10), transparent 55%),
+    #1c1f26;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  color: #eae6da;
 }
