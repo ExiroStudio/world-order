@@ -437,7 +437,7 @@ export default function RoomPage({
     <div className="min-h-screen flex flex-col pb-12 bg-[#1c1f26] text-[#eae6da]">
       <Navbar roomCode={roomCode} />
 
-      <main className="w-full max-w-5xl mx-auto px-4 flex-1 flex flex-col items-center">
+      <main className="w-full max-w-5xl mx-auto px-2 sm:px-4 flex-1 flex flex-col items-center">
         {/* Scoreboard */}
         <Scoreboard
           state={room.gameState}

@@ -65,7 +65,7 @@ export default function LocalGamePage() {
     <div className="min-h-screen flex flex-col pb-12 bg-[#0f1217] text-[#eae6da]">
       <Navbar isLocal />
 
-      <main className="w-full max-w-5xl mx-auto px-4 flex-1 flex flex-col items-center">
+      <main className="w-full max-w-5xl mx-auto px-2 sm:px-4 flex-1 flex flex-col items-center">
         {/* Scoreboard Command Deck */}
         <Scoreboard state={gameState} />
 

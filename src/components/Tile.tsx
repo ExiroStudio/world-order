@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Tile as TileType, TeamId } from '@/types/game';
-import { calculateTileCoordinates, CONTINENTS } from '@/lib/board';
+import { calculateSquareCoordinates, CONTINENTS } from '@/lib/board';
 import { TEAM_DEFINITIONS } from '@/lib/gameConfig';
 
 interface TileProps {
@@ -10,7 +10,6 @@ interface TileProps {
   owner: TeamId | null;
   isCurrentPosition?: boolean;
   pulse?: boolean;
-  compact?: boolean;
 }
 
 export const Tile: React.FC<TileProps> = ({
@@ -18,16 +17,14 @@ export const Tile: React.FC<TileProps> = ({
   owner,
   isCurrentPosition = false,
   pulse = false,
-  compact = false,
 }) => {
-  const coords = calculateTileCoordinates(tile.id, undefined, compact);
+  const coords = calculateSquareCoordinates(tile.id);
   const ownerDef = owner ? TEAM_DEFINITIONS[owner] : null;
   const continentDef = tile.continent ? CONTINENTS[tile.continent] : null;
 
   const customStyle: React.CSSProperties = {
-    left: `${coords.x}%`,
-    top: `${coords.y}%`,
-    width: 'clamp(44px, 11vw, 100px)',
+    ['--tile-x' as string]: `${coords.x}%`,
+    ['--tile-y' as string]: `${coords.y}%`,
   };
 
   let bgClasses = 'bg-[#181d26] border-[#2f3746] text-[#eae6da]';
@@ -46,9 +43,9 @@ export const Tile: React.FC<TileProps> = ({
   return (
     <div
       style={customStyle}
-      className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-xl p-1.5 text-center text-[clamp(7px,2vw,10px)] leading-tight border transition-transform duration-150 z-10 select-none shadow-md ${bgClasses} ${
+      className={`board-tile absolute -translate-x-1/2 -translate-y-1/2 rounded-lg sm:rounded-xl p-1 min-[390px]:p-1.5 sm:p-2 text-center leading-tight border transition-transform duration-150 z-10 select-none shadow-md ${bgClasses} w-[15.2%] h-[15.2%] flex flex-col justify-between overflow-hidden ${
         pulse
-          ? 'ring-2 ring-[#c9a13b] scale-105 z-30'
+          ? 'ring-2 ring-[#c9a13b] scale-105 z-30 shadow-[0_0_16px_rgba(201,161,59,0.6)]'
           : ''
       } ${
         isCurrentPosition && !pulse
@@ -58,18 +55,18 @@ export const Tile: React.FC<TileProps> = ({
     >
       {/* Continent Header Bar for Countries */}
       {continentDef && (
-        <div className="flex items-center justify-between mb-1 px-1 py-0.5 rounded-md bg-black/30 border border-white/5">
-          <div className="flex items-center gap-1">
+        <div className="flex items-center justify-between mb-0.5 sm:mb-1 px-1 py-0.5 rounded bg-black/40 border border-white/10 shrink-0">
+          <div className="flex items-center gap-1 min-w-0">
             <span
-              className="w-1.5 h-1.5 rounded-full shadow-sm"
+              className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shadow-sm shrink-0"
               style={{ backgroundColor: continentDef.color }}
               title={`Benua: ${continentDef.name}`}
             />
-            <span className="text-[clamp(6px,1.5vw,7.5px)] uppercase tracking-wider text-zinc-300 font-semibold truncate max-w-[42px]">
-              {continentDef.name.slice(0, 5)}
+            <span className="text-[7.5px] min-[390px]:text-[8.5px] sm:text-[9.5px] uppercase tracking-wider text-zinc-300 font-bold truncate">
+              {continentDef.name.slice(0, 3)}
             </span>
           </div>
-          <span className="text-[clamp(6px,1.6vw,8px)] text-[#c9a13b] font-mono font-bold">
+          <span className="text-[8px] min-[390px]:text-[9px] sm:text-[10px] md:text-[11px] text-[#c9a13b] font-mono font-bold shrink-0">
             ${tile.price}
           </span>
         </div>
@@ -77,31 +74,35 @@ export const Tile: React.FC<TileProps> = ({
 
       {/* Start Banner */}
       {tile.type === 'start' && (
-        <div className="text-[clamp(6px,1.6vw,8px)] uppercase tracking-wider mb-0.5 opacity-80">
-          Kongres Dunia
+        <div className="text-[7.5px] min-[390px]:text-[8.5px] sm:text-[9.5px] uppercase tracking-wider mb-0.5 opacity-90 font-bold shrink-0 flex items-center justify-center gap-1">
+          <span>🏛️</span>
+          <span>KONGRES</span>
         </div>
       )}
 
       {/* Tile Name */}
-      <div className="font-semibold line-clamp-2 leading-tight tracking-tight text-[clamp(7px,1.9vw,10.5px)]">
-        {tile.type === 'start' ? `★ ${tile.name}` : tile.name}
+      <div className="my-auto py-0.5">
+        <div className="font-bold line-clamp-2 leading-tight tracking-tight text-[8px] min-[390px]:text-[9.5px] sm:text-[11px] md:text-[12.5px]">
+          {tile.type === 'start' ? 'DUNIA' : tile.name}
+        </div>
       </div>
 
       {/* Basis Tag */}
       {tile.type === 'basis' && (
-        <div className="text-[clamp(6px,1.5vw,7.5px)] text-[#c9a13b] font-bold tracking-wider mt-0.5 uppercase bg-black/40 py-0.5 rounded">
-          ⚡ Basis Kekuatan
+        <div className="text-[7.5px] min-[390px]:text-[8.5px] sm:text-[9.5px] text-[#c9a13b] font-bold tracking-wider uppercase bg-black/40 py-0.5 px-1 rounded flex items-center justify-center gap-1 shrink-0">
+          <span>⚡</span>
+          <span>Basis</span>
         </div>
       )}
 
       {/* Owner Badge */}
       {ownerDef && (
-        <div className="mt-1 px-1 py-0.5 rounded bg-black/40 text-[clamp(6px,1.5vw,7.5px)] font-bold uppercase tracking-wider truncate flex items-center justify-center gap-1">
+        <div className="mt-0.5 sm:mt-1 px-1 py-0.5 rounded bg-black/60 text-[7.5px] min-[390px]:text-[8.5px] sm:text-[9.5px] font-bold uppercase tracking-wider truncate flex items-center justify-center gap-1 shrink-0">
           <span
-            className="w-1.5 h-1.5 rounded-full"
+            className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shrink-0"
             style={{ backgroundColor: ownerDef.lightHex }}
           />
-          <span>{ownerDef.name}</span>
+          <span className="truncate">{ownerDef.name.slice(0, 7)}</span>
         </div>
       )}
     </div>

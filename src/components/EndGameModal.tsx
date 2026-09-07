@@ -41,24 +41,25 @@ export const EndGameModal: React.FC<EndGameModalProps> = ({
   const isTie = state.winner === 'tie';
 
   return (
-    <div className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-in fade-in duration-300">
-      <div className="bg-[#262b35] border border-[#c9a13b] rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl text-[#eae6da] text-center relative">
-        <div className="font-serif tracking-widest text-xs text-[#c9a13b] mb-2 uppercase font-semibold">
-          ✦ Permainan Selesai ✦
-        </div>
+    <div className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto animate-in fade-in duration-300">
+      <div className="bg-[#262b35] border border-[#c9a13b] rounded-2xl max-w-lg w-full p-4 sm:p-8 shadow-2xl text-[#eae6da] text-center relative my-auto max-h-[92vh] flex flex-col">
+        <div className="flex-1 overflow-y-auto overscroll-contain pr-1 min-h-0">
+          <div className="font-serif tracking-widest text-xs text-[#c9a13b] mb-2 uppercase font-semibold">
+            ✦ Permainan Selesai ✦
+          </div>
 
-        <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#f4ecd8] mb-3">
-          {isTie
-            ? 'Hasil Imbang di Puncak Kekuasaan'
-            : `${top.team.name} Menguasai Dunia!`}
-        </h2>
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#f4ecd8] mb-3">
+            {isTie
+              ? 'Hasil Imbang di Puncak Kekuasaan'
+              : `${top.team.name} Menguasai Dunia!`}
+          </h2>
 
-        {/* Narrative Verdict */}
-        <div className="bg-[#1c1f26] rounded-xl p-4 border border-[#3a4150] text-xs text-[#9aa1ad] leading-relaxed text-left mb-6 italic">
-          {isTie
-            ? 'Dua ideologi atau lebih mengakhiri pertarungan dengan total kekayaan yang seimbang. Keseimbangan kekuasaan dunia tetap terbuka dan cair.'
-            : HISTORICAL_NARRATIVES[top.team.id]}
-        </div>
+          {/* Narrative Verdict */}
+          <div className="bg-[#1c1f26] rounded-xl p-4 border border-[#3a4150] text-xs text-[#9aa1ad] leading-relaxed text-left mb-6 italic">
+            {isTie
+              ? 'Dua ideologi atau lebih mengakhiri pertarungan dengan total kekayaan yang seimbang. Keseimbangan kekuasaan dunia tetap terbuka dan cair.'
+              : HISTORICAL_NARRATIVES[top.team.id]}
+          </div>
 
         {/* Final Standings */}
         <div className="space-y-2 mb-6 text-left">
@@ -105,14 +106,17 @@ export const EndGameModal: React.FC<EndGameModalProps> = ({
             </div>
           ))}
         </div>
+        </div>
 
-        <button
-          type="button"
-          onClick={onRestart}
-          className="w-full py-3 px-6 rounded-xl bg-[#c9a13b] hover:bg-[#deb447] text-[#1c1f26] font-bold text-sm transition-all shadow-lg active:scale-98 cursor-pointer"
-        >
-          Main Lagi
-        </button>
+        <div className="shrink-0 pt-3 border-t border-[#3a4150]">
+          <button
+            type="button"
+            onClick={onRestart}
+            className="w-full py-3 px-6 rounded-xl bg-[#c9a13b] hover:bg-[#deb447] text-[#1c1f26] font-bold text-sm transition-all shadow-lg active:scale-98 cursor-pointer"
+          >
+            Main Lagi
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -69,30 +69,24 @@ export function isContinentMonopolized(
   return continent.countryTileIds.every((id) => owners[id] === teamId);
 }
 
-export function calculateTileCoordinates(
-  index: number,
-  total: number = TOTAL_TILES,
-  compact: boolean = false
-) {
-  const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
+export function calculateSquareCoordinates(index: number) {
+  // 6 equidistant grid points along each side of the square perimeter (step = 16.8%)
+  const c = [8.0, 24.8, 41.6, 58.4, 75.2, 92.0];
 
-  if (compact) {
-    const cos = Math.cos(angle);
-    const sin = Math.sin(angle);
-    const squircleX = Math.sign(cos) * Math.pow(Math.abs(cos), 0.9);
-    const squircleY = Math.sign(sin) * Math.pow(Math.abs(sin), 0.9);
-
-    return {
-      x: 50 + 36 * squircleX,
-      y: 50 + 36 * squircleY,
-    };
+  if (index >= 0 && index <= 5) {
+    // Top side: col 0 to 5, row 0 (left to right)
+    return { x: c[index], y: c[0] };
+  } else if (index >= 6 && index <= 10) {
+    // Right side: col 5, row 1 to 5 (top to bottom)
+    return { x: c[5], y: c[index - 5] };
+  } else if (index >= 11 && index <= 15) {
+    // Bottom side: col 4 down to 0, row 5 (right to left)
+    return { x: c[15 - index], y: c[5] };
+  } else if (index >= 16 && index <= 19) {
+    // Left side: col 0, row 4 down to 1 (bottom to top)
+    return { x: c[0], y: c[20 - index] };
   }
-
-  const rx = 44;
-  const ry = 41;
-
-  return {
-    x: 50 + rx * Math.cos(angle),
-    y: 50 + ry * Math.sin(angle),
-  };
+  return { x: 50, y: 50 };
 }
+
+export const calculateTileCoordinates = calculateSquareCoordinates;

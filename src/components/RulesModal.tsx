@@ -13,8 +13,8 @@ export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
-      <div className="bg-[#262b35] border border-[#c9a13b] rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col p-6 shadow-2xl text-[#eae6da] relative">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto animate-in fade-in duration-200">
+      <div className="bg-[#262b35] border border-[#c9a13b] rounded-2xl max-w-2xl w-full max-h-[88vh] flex flex-col p-4 sm:p-6 shadow-2xl text-[#eae6da] relative my-auto">
         <div className="flex items-center justify-between pb-3 border-b border-[#3a4150]">
           <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#f4ecd8]">
             Aturan Main World Order: Monopoli Ideologi Dunia

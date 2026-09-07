@@ -42,10 +42,10 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
-      <div className="bg-[#151922]/95 border border-[#333d4e] rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl text-[#eae6da] relative">
+    <div className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto animate-in fade-in duration-200">
+      <div className="bg-[#151922]/95 border border-[#333d4e] rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-6 shadow-2xl text-[#eae6da] relative my-auto max-h-[92vh] flex flex-col">
         {/* Eyebrow / Dossier Header */}
-        <div className="flex items-center justify-between mb-3 pb-3 border-b border-[#252c38]">
+        <div className="flex items-center justify-between mb-3 pb-3 border-b border-[#252c38] shrink-0">
           <div className="text-xs font-bold text-[#c9a13b] tracking-wider uppercase flex items-center gap-2">
             <span
               className="w-2.5 h-2.5 rounded-full shadow-sm"
@@ -58,112 +58,119 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
           </span>
         </div>
 
-        {/* Question Text */}
-        <h3 className="font-serif text-lg sm:text-xl font-bold leading-snug mb-5 text-[#f4ecd8]">
-          {question.q}
-        </h3>
+        {/* Scrollable Content Body */}
+        <div className="flex-1 overflow-y-auto overscroll-contain pr-1 sm:pr-2 space-y-4 min-h-0">
+          {/* Question Text */}
+          <h3 className="font-serif text-base sm:text-xl font-bold leading-snug text-[#f4ecd8]">
+            {question.q}
+          </h3>
 
-        {/* Options Deck */}
-        <div className="space-y-2.5 mb-5">
-          {question.opts.map((opt, idx) => {
-            const hasAnswered = answered !== null || selectedIdx !== null;
-            const isCorrectOption = idx === question.correct;
-            const isChosen =
-              answered !== null
-                ? answered.chosenIndex === idx
-                : selectedIdx === idx;
+          {/* Options Deck */}
+          <div className="space-y-2">
+            {question.opts.map((opt, idx) => {
+              const hasAnswered = answered !== null || selectedIdx !== null;
+              const isCorrectOption = idx === question.correct;
+              const isChosen =
+                answered !== null
+                  ? answered.chosenIndex === idx
+                  : selectedIdx === idx;
 
-            let btnClasses =
-              'w-full text-left p-3.5 rounded-xl border font-medium text-xs sm:text-sm transition-all duration-200';
+              let btnClasses =
+                'w-full text-left p-3 rounded-xl border font-medium text-xs sm:text-sm transition-all duration-200';
 
-            if (!hasAnswered) {
-              btnClasses += isMyTurn
-                ? ' bg-[#1d232e] border-[#2e3748] text-[#eae6da] hover:bg-[#252c3a] hover:border-[#c9a13b]/70 hover:scale-[1.01] cursor-pointer active:scale-[0.99] shadow-sm'
-                : ' bg-[#1a1f29]/70 border-[#2a3240] text-[#7d8695] cursor-not-allowed';
-            } else {
-              if (isCorrectOption) {
-                btnClasses +=
-                  ' bg-emerald-950/70 border-emerald-500 text-emerald-200 font-semibold ring-2 ring-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]';
-              } else if (isChosen && !isCorrectOption) {
-                btnClasses +=
-                  ' bg-rose-950/70 border-rose-500 text-rose-200 font-semibold ring-1 ring-rose-500/50';
+              if (!hasAnswered) {
+                btnClasses += isMyTurn
+                  ? ' bg-[#1d232e] border-[#2e3748] text-[#eae6da] hover:bg-[#252c3a] hover:border-[#c9a13b]/70 hover:scale-[1.01] cursor-pointer active:scale-[0.99] shadow-sm'
+                  : ' bg-[#1a1f29]/70 border-[#2a3240] text-[#7d8695] cursor-not-allowed';
               } else {
-                btnClasses += ' bg-[#151922]/50 border-[#2a3240]/40 text-[#606977] opacity-60';
+                if (isCorrectOption) {
+                  btnClasses +=
+                    ' bg-emerald-950/70 border-emerald-500 text-emerald-200 font-semibold ring-2 ring-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]';
+                } else if (isChosen && !isCorrectOption) {
+                  btnClasses +=
+                    ' bg-rose-950/70 border-rose-500 text-rose-200 font-semibold ring-1 ring-rose-500/50';
+                } else {
+                  btnClasses += ' bg-[#151922]/50 border-[#2a3240]/40 text-[#606977] opacity-60';
+                }
               }
-            }
 
-            return (
-              <button
-                key={idx}
-                type="button"
-                disabled={!isMyTurn || hasAnswered}
-                onClick={() => handleOptionClick(idx)}
-                className={btnClasses}
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  disabled={!isMyTurn || hasAnswered}
+                  onClick={() => handleOptionClick(idx)}
+                  className={btnClasses}
+                >
+                  <div className="flex items-start gap-2.5">
+                    <span
+                      className={`font-mono text-xs px-1.5 py-0.5 rounded ${
+                        hasAnswered && isCorrectOption
+                          ? 'bg-emerald-500 text-black font-bold'
+                          : hasAnswered && isChosen && !isCorrectOption
+                          ? 'bg-rose-500 text-white font-bold'
+                          : 'bg-[#151922] text-[#c9a13b] border border-[#333d4e]'
+                      }`}
+                    >
+                      {String.fromCharCode(65 + idx)}
+                    </span>
+                    <span className="flex-1 leading-snug">{opt}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Educational Feedback Result & Hint Deck */}
+          {answered && (
+            <div className="space-y-3 animate-in fade-in slide-in-from-bottom-2 duration-300">
+              {/* Status Hint Banner */}
+              <div
+                className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border ${
+                  answered.isCorrect
+                    ? 'bg-emerald-950/40 border-emerald-500/60 text-emerald-200'
+                    : 'bg-rose-950/40 border-rose-500/60 text-rose-200'
+                }`}
               >
-                <div className="flex items-start gap-3">
-                  <span
-                    className={`font-mono text-xs px-1.5 py-0.5 rounded ${
-                      hasAnswered && isCorrectOption
-                        ? 'bg-emerald-500 text-black font-bold'
-                        : hasAnswered && isChosen && !isCorrectOption
-                        ? 'bg-rose-500 text-white font-bold'
-                        : 'bg-[#151922] text-[#c9a13b] border border-[#333d4e]'
-                    }`}
-                  >
-                    {String.fromCharCode(65 + idx)}
+                <div className="flex items-center justify-between font-bold text-sm mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base">
+                      {answered.isCorrect ? '🎯' : '❌'}
+                    </span>
+                    <span>
+                      {answered.isCorrect ? 'Jawaban Benar!' : 'Jawaban Salah!'}
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-black/40 border border-current">
+                    {answered.isCorrect
+                      ? `Maju +${state.activeDice} Petak`
+                      : `Mundur -${state.activeDice} Petak`}
                   </span>
-                  <span className="flex-1 leading-snug">{opt}</span>
                 </div>
-              </button>
-            );
-          })}
-        </div>
 
-        {/* Educational Feedback Result & Hint Deck */}
-        {answered && (
-          <div className="space-y-3 animate-in fade-in slide-in-from-bottom-2 duration-300">
-            {/* Status Hint Banner */}
-            <div
-              className={`p-4 rounded-2xl border ${
-                answered.isCorrect
-                  ? 'bg-emerald-950/40 border-emerald-500/60 text-emerald-200'
-                  : 'bg-rose-950/40 border-rose-500/60 text-rose-200'
-              }`}
-            >
-              <div className="flex items-center justify-between font-bold text-sm mb-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-base">
-                    {answered.isCorrect ? '🎯' : '❌'}
-                  </span>
+                {/* Property Permission Status */}
+                <div className="text-xs flex items-center gap-1.5 font-medium py-1 px-2 rounded-lg bg-black/30 border border-white/5 mb-2">
+                  <span>{answered.isCorrect ? '🏛️' : '⛔'}</span>
                   <span>
-                    {answered.isCorrect ? 'Jawaban Benar!' : 'Jawaban Salah!'}
+                    {answered.isCorrect
+                      ? 'Berhak membeli wilayah jika mendarat di negara netral.'
+                      : 'Hanya melewati wilayah. TIDAK DIIZINKAN membeli properti!'}
                   </span>
                 </div>
-                <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-black/40 border border-current">
-                  {answered.isCorrect
-                    ? `Maju +${state.activeDice} Petak`
-                    : `Mundur -${state.activeDice} Petak`}
-                </span>
-              </div>
 
-              {/* Property Permission Status */}
-              <div className="text-xs flex items-center gap-1.5 font-medium py-1 px-2 rounded-lg bg-black/30 border border-white/5 mb-2">
-                <span>{answered.isCorrect ? '🏛️' : '⛔'}</span>
-                <span>
-                  {answered.isCorrect
-                    ? 'Berhak membeli wilayah jika mendarat di negara netral.'
-                    : 'Hanya melewati wilayah. TIDAK DIIZINKAN membeli properti!'}
-                </span>
-              </div>
-
-              {/* Explanation Why */}
-              <div className="text-[11.5px] opacity-90 leading-relaxed pt-1 border-t border-white/10">
-                <span className="font-bold">Penjelasan: </span>
-                {question.why}
+                {/* Explanation Why */}
+                <div className="text-xs opacity-95 leading-relaxed pt-1.5 border-t border-white/10">
+                  <span className="font-bold text-[#c9a13b]">Penjelasan: </span>
+                  {question.why}
+                </div>
               </div>
             </div>
+          )}
+        </div>
 
-            {/* Action Continue Button */}
+        {/* Modal Footer / Action Continue Button */}
+        {answered ? (
+          <div className="shrink-0 pt-3 border-t border-[#252c38]">
             {isMyTurn ? (
               <button
                 type="button"
@@ -179,13 +186,11 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
               </div>
             )}
           </div>
-        )}
-
-        {!isMyTurn && !answered && (
-          <div className="mt-3 text-center text-xs text-[#848d9c] italic">
+        ) : !isMyTurn ? (
+          <div className="shrink-0 pt-3 border-t border-[#252c38] text-center text-xs text-[#848d9c] italic">
             Menunggu {currentTeam.name} menjawab pertanyaan...
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

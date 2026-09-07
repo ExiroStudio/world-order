@@ -29,17 +29,6 @@ export const Board: React.FC<BoardProps> = ({
     fasisme: state.teams.fasisme.position,
     kapitalisme: state.teams.kapitalisme.position,
   }));
-  const [isCompactBoard, setIsCompactBoard] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 640px)');
-    const syncCompact = () => setIsCompactBoard(mediaQuery.matches);
-
-    syncCompact();
-    mediaQuery.addEventListener('change', syncCompact);
-
-    return () => mediaQuery.removeEventListener('change', syncCompact);
-  }, []);
 
   const [hoppingTeamId, setHoppingTeamId] = useState<TeamId | null>(null);
   const [hoppingTileId, setHoppingTileId] = useState<number | null>(null);
@@ -132,10 +121,24 @@ export const Board: React.FC<BoardProps> = ({
   }, [state.teams, state.lastMove, visualPositions]);
 
   return (
-    <div className="relative w-full max-w-[900px] mx-auto aspect-[1/0.78] sm:aspect-[1/0.74] select-none my-4">
-      {/* Board Background Subtle Oval Ring */}
-      <div className="absolute inset-[5%] rounded-[48%] border border-[#2f3746]/60 pointer-events-none bg-gradient-to-b from-[#181d26]/40 via-[#13161c]/50 to-[#0e1015]/60" />
-      <div className="absolute inset-[15%] rounded-[48%] border border-dashed border-[#c9a13b]/15 pointer-events-none" />
+    <div className="relative w-full max-w-[680px] sm:max-w-[720px] aspect-square mx-auto select-none my-2 sm:my-4">
+      {/* Board Background: Square Monopoly Track */}
+      <div className="absolute inset-[0.4%] rounded-2xl border border-[#333e50]/80 pointer-events-none bg-gradient-to-b from-[#161a22] via-[#12151c] to-[#0c0e13] shadow-2xl" />
+      <div className="absolute inset-[15.6%] rounded-xl border border-[#2e3746] pointer-events-none bg-[#101319]/80 shadow-inner" />
+      <div className="absolute inset-[16.5%] rounded-lg border border-dashed border-[#c9a13b]/20 pointer-events-none" />
+
+      {/* Center Branding Watermark */}
+      <div className="absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none select-none">
+        <div className="text-[8px] sm:text-xs font-mono tracking-[0.25em] uppercase text-[#c9a13b] font-bold">
+          ✦ World Order ✦
+        </div>
+        <div className="font-serif text-xs sm:text-lg font-bold tracking-wider text-[#f4ecd8] opacity-90 mt-0.5">
+          Monopoli Ideologi Dunia
+        </div>
+        <div className="text-[7.5px] sm:text-[9.5px] text-[#7d8695] font-mono mt-0.5">
+          Ronde {state.round} / 30
+        </div>
+      </div>
 
       {/* Tiles */}
       {TILES.map((tile) => {
@@ -151,7 +154,6 @@ export const Board: React.FC<BoardProps> = ({
             owner={owner}
             isCurrentPosition={isCurrentTile}
             pulse={isPulsing}
-            compact={isCompactBoard}
           />
         );
       })}
@@ -171,7 +173,6 @@ export const Board: React.FC<BoardProps> = ({
             isBankrupt={team.bankrupt}
             isHopping={isHopping}
             isCurrentTurn={isCurrentTurn}
-            compact={isCompactBoard}
           />
         );
       })}

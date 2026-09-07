@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { TeamId } from '@/types/game';
-import { calculateTileCoordinates } from '@/lib/board';
+import { calculateSquareCoordinates } from '@/lib/board';
 import { TEAM_DEFINITIONS } from '@/lib/gameConfig';
 
 interface TokenProps {
@@ -12,14 +12,20 @@ interface TokenProps {
   isBankrupt?: boolean;
   isHopping?: boolean;
   isCurrentTurn?: boolean;
-  compact?: boolean;
 }
 
-const TOKEN_OFFSETS: Record<TeamId, [number, number]> = {
-  liberalisme: [-8, -8],
-  komunisme: [8, -8],
-  fasisme: [-8, 8],
-  kapitalisme: [8, 8],
+const SQ_OFFSETS: Record<TeamId, [number, number]> = {
+  liberalisme: [-5, -5],
+  komunisme: [5, -5],
+  fasisme: [-5, 5],
+  kapitalisme: [5, 5],
+};
+
+const LG_OFFSETS: Record<TeamId, [number, number]> = {
+  liberalisme: [-12, -12],
+  komunisme: [12, -12],
+  fasisme: [-12, 12],
+  kapitalisme: [12, 12],
 };
 
 export const Token: React.FC<TokenProps> = ({
@@ -28,35 +34,38 @@ export const Token: React.FC<TokenProps> = ({
   isBankrupt,
   isHopping = false,
   isCurrentTurn = false,
-  compact = false,
 }) => {
   if (isBankrupt) return null;
 
-  const coords = calculateTileCoordinates(position, undefined, compact);
-  const [offsetX, offsetY] = TOKEN_OFFSETS[teamId];
+  const coords = calculateSquareCoordinates(position);
   const def = TEAM_DEFINITIONS[teamId];
+
+  const customStyle: React.CSSProperties = {
+    ['--tok-x' as string]: `${coords.x}%`,
+    ['--tok-y' as string]: `${coords.y}%`,
+    ['--tok-ox' as string]: `${SQ_OFFSETS[teamId][0]}px`,
+    ['--tok-oy' as string]: `${SQ_OFFSETS[teamId][1]}px`,
+    ['--tok-ox-lg' as string]: `${LG_OFFSETS[teamId][0]}px`,
+    ['--tok-oy-lg' as string]: `${LG_OFFSETS[teamId][1]}px`,
+    backgroundColor: def.colorHex,
+    boxShadow: isHopping
+      ? `0 0 16px ${def.colorHex}, 0 0 6px white`
+      : isCurrentTurn
+      ? `0 0 10px ${def.colorHex}`
+      : '0 2px 5px rgba(0,0,0,0.6)',
+  };
 
   return (
     <div
       title={`${def.name} di petak ${position}`}
-      style={{
-        left: `calc(${coords.x}% + ${offsetX}px)`,
-        top: `calc(${coords.y}% + ${offsetY}px)`,
-        width: 'clamp(18px, 4vw, 24px)',
-        height: 'clamp(18px, 4vw, 24px)',
-        backgroundColor: def.colorHex,
-        boxShadow: isHopping
-          ? `0 0 16px ${def.colorHex}, 0 0 6px white`
-          : isCurrentTurn
-          ? `0 0 10px ${def.colorHex}`
-          : '0 3px 6px rgba(0,0,0,0.6)',
-      }}
-      className={`absolute rounded-[8px] sm:rounded-full border-2 border-[#f4ecd8] transform -translate-x-1/2 -translate-y-1/2 z-40 flex items-center justify-center cursor-pointer transition-[left,top,transform] duration-150 ease-out ${
-        isHopping ? '-translate-y-3 scale-125' : 'hover:scale-110'
+      style={customStyle}
+      className={`board-token absolute w-4 h-4 min-[390px]:w-5 min-[390px]:h-5 sm:w-6 sm:h-6 rounded-full border-2 border-[#f4ecd8] transform -translate-x-1/2 -translate-y-1/2 z-40 flex items-center justify-center cursor-pointer transition-[left,top,transform] duration-150 ease-out ${
+        isHopping ? '-translate-y-2 scale-125' : 'hover:scale-110'
       } ${isCurrentTurn && !isHopping ? 'ring-2 ring-white/80' : ''}`}
     >
-      <div className="w-2 h-2 rounded-[3px] sm:rounded-full bg-white/90 shadow-sm" />
+      <div className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-white/90 shadow-sm" />
     </div>
   );
 };
+
 
