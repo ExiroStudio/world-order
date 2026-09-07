@@ -29,6 +29,17 @@ export const Board: React.FC<BoardProps> = ({
     fasisme: state.teams.fasisme.position,
     kapitalisme: state.teams.kapitalisme.position,
   }));
+  const [isCompactBoard, setIsCompactBoard] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 640px)');
+    const syncCompact = () => setIsCompactBoard(mediaQuery.matches);
+
+    syncCompact();
+    mediaQuery.addEventListener('change', syncCompact);
+
+    return () => mediaQuery.removeEventListener('change', syncCompact);
+  }, []);
 
   const [hoppingTeamId, setHoppingTeamId] = useState<TeamId | null>(null);
   const [hoppingTileId, setHoppingTileId] = useState<number | null>(null);
@@ -140,6 +151,7 @@ export const Board: React.FC<BoardProps> = ({
             owner={owner}
             isCurrentPosition={isCurrentTile}
             pulse={isPulsing}
+            compact={isCompactBoard}
           />
         );
       })}
@@ -159,6 +171,7 @@ export const Board: React.FC<BoardProps> = ({
             isBankrupt={team.bankrupt}
             isHopping={isHopping}
             isCurrentTurn={isCurrentTurn}
+            compact={isCompactBoard}
           />
         );
       })}

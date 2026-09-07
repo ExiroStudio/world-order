@@ -69,11 +69,28 @@ export function isContinentMonopolized(
   return continent.countryTileIds.every((id) => owners[id] === teamId);
 }
 
-export function calculateTileCoordinates(index: number, total: number = TOTAL_TILES) {
-  // Ellipse coordinates on 100x100 space, rotated so tile 0 (Kongres) is top-center
+export function calculateTileCoordinates(
+  index: number,
+  total: number = TOTAL_TILES,
+  compact: boolean = false
+) {
   const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
-  const rx = 44; // radius x percent
-  const ry = 41; // radius y percent
+
+  if (compact) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    const squircleX = Math.sign(cos) * Math.pow(Math.abs(cos), 0.9);
+    const squircleY = Math.sign(sin) * Math.pow(Math.abs(sin), 0.9);
+
+    return {
+      x: 50 + 36 * squircleX,
+      y: 50 + 36 * squircleY,
+    };
+  }
+
+  const rx = 44;
+  const ry = 41;
+
   return {
     x: 50 + rx * Math.cos(angle),
     y: 50 + ry * Math.sin(angle),
