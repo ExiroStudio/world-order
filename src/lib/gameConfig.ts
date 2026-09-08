@@ -1,7 +1,7 @@
 import { TeamDefinition, TeamId } from '@/types/game';
 
 export const GAME_CONFIG = {
-  STARTING_CASH: 500,
+  STARTING_CASH: 200,
   BASE_RENT_PERCENT: 0.1, // 10%
   CONTINENT_SET_RENT_PERCENT: 0.25, // 25%
   CONGRESS_INCOME_PER_COUNTRY: 50,
@@ -9,7 +9,7 @@ export const GAME_CONFIG = {
   COUNTRY_SELL_RATIO: 0.5, // 50% refund when sold back to bank
   BASIS_BONUS: 150, // +$150 on correct answer
   BASIS_MALUS: 150, // -$150 on wrong answer
-  MAX_ROUNDS: 30, // 30 total rounds
+  MAX_ROUNDS: 10, // 30 total rounds
 
   // Perks
   KAPITALISME_CONGRESS_BONUS_MULT: 1.25, // +25% Congress income
