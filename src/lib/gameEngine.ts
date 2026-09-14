@@ -680,6 +680,85 @@ export function resolveCongressChoice(
   return resolveLandingTile(newState, landedTilePos, isCorrect);
 }
 
+export function countOwnedCountries(state: GameState, teamId: TeamId): number {
+  let count = 0;
+  state.owners.forEach((owner, idx) => {
+    if (owner === teamId && TILES[idx].type === 'country') {
+      count++;
+    }
+  });
+  return count;
+}
+
+export function calculateLeavePenalty(
+  state: GameState,
+  teamId: TeamId
+): { countryCount: number; penaltyAmount: number } {
+  const countryCount = countOwnedCountries(state, teamId);
+  const penaltyAmount = countryCount > 0 ? countryCount * 100 : 100;
+  return { countryCount, penaltyAmount };
+}
+
+export function applyLeavePenalty(
+  state: GameState,
+  teamId: TeamId
+): GameState {
+  if (state.gameOver) return state;
+
+  const newState = structuredClone(state);
+  const team = newState.teams[teamId];
+  if (!team || team.bankrupt || team.isNeutral) return state;
+
+  const { countryCount, penaltyAmount } = calculateLeavePenalty(newState, teamId);
+
+  // Potong kas pemain
+  team.cash -= penaltyAmount;
+
+  // Distribusikan dana yang dicuri ke ideologi lawan yang aktif
+  const opponents = getActivePlayableTeams(newState).filter((t) => t.id !== teamId);
+  if (opponents.length > 0) {
+    const share = Math.floor(penaltyAmount / opponents.length);
+    opponents.forEach((op) => {
+      op.cash += share;
+    });
+  }
+
+  // Jika sedang dalam fase pertanyaan dan belum selesai, batalkan & nyatakan salah
+  let questionCancelled = false;
+  if (newState.phase === 'QUESTION' && !newState.questionAnswered) {
+    if (newState.currentQuestion) {
+      if (!newState.usedQuestionIds.includes(newState.currentQuestion.id)) {
+        newState.usedQuestionIds.push(newState.currentQuestion.id);
+      }
+    }
+    newState.questionAnswered = {
+      chosenIndex: -1,
+      isCorrect: false,
+    };
+    questionCancelled = true;
+  }
+
+  const countryMsg =
+    countryCount > 0 ? `${countryCount} negara` : '0 negara (denda minimum)';
+  const questionMsg = questionCancelled
+    ? ' Pertanyaan dibatalkan & dianggap salah.'
+    : '';
+
+  newState.log.unshift(
+    createLog(
+      `🚨 Akibat: Anda meninggalkan permainan, para ideologi mulai mencuri dari anda! Kas ${team.name} terpotong $${penaltyAmount} (100 × ${countryMsg}).${questionMsg}`,
+      teamId
+    )
+  );
+
+  handleBankruptcyCheck(newState, teamId);
+  if (team.bankrupt) {
+    return advanceTurn(newState);
+  }
+
+  return newState;
+}
+
 export function processGameAction(
   state: GameState,
   action: GameAction
@@ -715,6 +794,10 @@ export function processGameAction(
         action.payload.choice,
         action.payload.countryIndex
       );
+    }
+    case 'LEAVE_PENALTY': {
+      if (action.teamId !== currentTeamId) return state;
+      return applyLeavePenalty(state, action.teamId);
     }
     default:
       return state;

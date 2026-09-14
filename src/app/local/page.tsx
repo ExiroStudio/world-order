@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { GameState } from '@/types/game';
+import { GameState, TeamId } from '@/types/game';
 import {
   initGameState,
   rollDice,
@@ -9,6 +9,8 @@ import {
   executeMove,
   resolveBuyDecision,
   resolveCongressChoice,
+  applyLeavePenalty,
+  calculateLeavePenalty,
 } from '@/lib/gameEngine';
 import { TEAMS_ORDER } from '@/lib/gameConfig';
 import { Navbar } from '@/components/Navbar';
@@ -19,6 +21,8 @@ import { BuyPrompt } from '@/components/BuyPrompt';
 import { CongressChoiceModal } from '@/components/CongressChoiceModal';
 import { EndGameModal } from '@/components/EndGameModal';
 import { GameLog } from '@/components/GameLog';
+import { LeaveConsequenceModal } from '@/components/LeaveConsequenceModal';
+import { useAntiCheat } from '@/hooks/useAntiCheat';
 
 export default function LocalGamePage() {
   const [gameState, setGameState] = useState<GameState>(() => initGameState());
@@ -26,6 +30,41 @@ export default function LocalGamePage() {
     null
   );
   const [isMoving, setIsMoving] = useState(false);
+  const [consequenceModal, setConsequenceModal] = useState<{
+    isOpen: boolean;
+    teamId: TeamId;
+    countryCount: number;
+    penaltyAmount: number;
+    wasInQuestionPhase: boolean;
+  }>({
+    isOpen: false,
+    teamId: 'liberalisme',
+    countryCount: 0,
+    penaltyAmount: 100,
+    wasInQuestionPhase: false,
+  });
+
+  useAntiCheat({
+    enabled: !gameState.gameOver,
+    onLeaveGame: () => {
+      const activeTeamId = TEAMS_ORDER[gameState.turnIndex];
+      const { countryCount, penaltyAmount } = calculateLeavePenalty(
+        gameState,
+        activeTeamId
+      );
+      const wasInQuestion =
+        gameState.phase === 'QUESTION' && !gameState.questionAnswered;
+
+      setGameState((prev) => applyLeavePenalty(prev, activeTeamId));
+      setConsequenceModal({
+        isOpen: true,
+        teamId: activeTeamId,
+        countryCount,
+        penaltyAmount,
+        wasInQuestionPhase: wasInQuestion,
+      });
+    },
+  });
 
   const handleRollDice = () => {
     setGameState((prev) => rollDice(prev));
@@ -110,6 +149,17 @@ export default function LocalGamePage() {
       <EndGameModal
         state={gameState}
         onRestart={handleRestart}
+      />
+
+      <LeaveConsequenceModal
+        isOpen={consequenceModal.isOpen}
+        teamId={consequenceModal.teamId}
+        countryCount={consequenceModal.countryCount}
+        penaltyAmount={consequenceModal.penaltyAmount}
+        wasInQuestionPhase={consequenceModal.wasInQuestionPhase}
+        onDismiss={() =>
+          setConsequenceModal((prev) => ({ ...prev, isOpen: false }))
+        }
       />
     </div>
   );

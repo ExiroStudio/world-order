@@ -1,7 +1,8 @@
+// Sesuaikan import ini dengan lokasi type Question di project-mu (lib/gameEngine.ts atau types/game.ts)
 import type { Question } from '../types/game';
 
 export const QUESTIONS: Question[] = [
-  // ==================== SOAL LAMA (1-32) ====================
+  // ==================== LIBERALISME (1-4, 33-47) ====================
   {
     id: 1,
     q: 'Tokoh yang dianggap bapak liberalisme klasik dengan gagasan hak alami (life, liberty, property)?',
@@ -12,7 +13,7 @@ export const QUESTIONS: Question[] = [
   {
     id: 2,
     q: 'Revolusi yang menjadi tonggak lahirnya nilai-nilai liberalisme modern di Eropa?',
-    opts: ['Revolusi Industri', 'Revolusi Prancis 1789', 'Revolusi Rusia 1917', 'Revolusi Amerika 1776 saja'],
+    opts: ['Revolusi Industri', 'Revolusi Prancis 1789', 'Revolusi Rusia 1917', 'Revolusi Amerika 1776'],
     correct: 1,
     why: 'Revolusi Prancis 1789 mempopulerkan gagasan kebebasan (liberté), persamaan (égalité), dan persaudaraan.',
   },
@@ -31,209 +32,11 @@ export const QUESTIONS: Question[] = [
     why: 'Liberalisme mendorong demokrasi dengan aturan konstitusi yang membatasi kesewenang-wenangan penguasa.',
   },
   {
-    id: 5,
-    q: 'Karl Marx dan Friedrich Engels menulis dokumen penting tahun 1848 yang berjudul?',
-    opts: ['The Wealth of Nations', 'Manifesto Komunis', 'Mein Kampf', 'The Social Contract'],
-    correct: 1,
-    why: 'Manifesto Komunis (1848) berisi seruan dan analisis perjuangan kelas antara kaum borjuis dan proletar.',
-  },
-  {
-    id: 6,
-    q: 'Konsep sentral Marx tentang konflik antara pemilik modal dan buruh disebut?',
-    opts: ['Perang saudara', 'Pertentangan kelas', 'Revolusi hijau', 'Kontrak sosial'],
-    correct: 1,
-    why: 'Marx memandang sejarah peradaban digerakkan oleh pertentangan kelas ekonomi.',
-  },
-  {
-    id: 7,
-    q: 'Negara pertama yang menerapkan komunisme setelah Revolusi 1917 adalah?',
-    opts: ['China', 'Kuba', 'Uni Soviet (Rusia)', 'Vietnam'],
-    correct: 2,
-    why: 'Revolusi Bolshevik Oktober 1917 melahirkan Uni Soviet sebagai negara sosialis/komunis pertama di dunia.',
-  },
-  {
-    id: 8,
-    q: 'Tokoh yang memimpin Revolusi Bolshevik 1917 di Rusia?',
-    opts: ['Joseph Stalin', 'Vladimir Lenin', 'Leon Trotsky saja', 'Nikita Khrushchev'],
-    correct: 1,
-    why: 'Vladimir Lenin memimpin faksi Bolshevik merebut kekuasaan dan mendirikan pemerintahan Soviet.',
-  },
-  {
-    id: 9,
-    q: 'Ciri utama ekonomi komunis adalah kepemilikan alat produksi berada di tangan?',
-    opts: ['Individu/swasta', 'Negara atau kolektif', 'Perusahaan multinasional', 'Gereja / agamawan'],
-    correct: 1,
-    why: 'Dalam komunisme, alat produksi dikuasai secara kolektif oleh negara untuk kesejahteraan bersama tanpa kelas.',
-  },
-  {
-    id: 10,
-    q: 'Fasisme modern pertama kali berkembang dan berkuasa di negara?',
-    opts: ['Jerman', 'Spanyol', 'Italia', 'Jepang'],
-    correct: 2,
-    why: 'Fasisme lahir di Italia pada 1920-an di bawah kepemimpinan Benito Mussolini.',
-  },
-  {
-    id: 11,
-    q: 'Tokoh yang memimpin gerakan fasisme di Italia?',
-    opts: ['Francisco Franco', 'Benito Mussolini', 'Adolf Hitler', 'Hirohito'],
-    correct: 1,
-    why: 'Benito Mussolini adalah pencetus istilah fasisme (fascio) dan penguasa fasis Italia.',
-  },
-  {
-    id: 12,
-    q: 'Bentuk fasisme yang berkembang di Jerman di bawah Adolf Hitler disebut?',
-    opts: ['Leninisme', 'Nazisme (Nasional-Sosialisme)', 'Maoisme', 'Anarko-sindikalisme'],
-    correct: 1,
-    why: 'Nazisme adalah varian fasisme Jerman yang menambahkan doktrin rasisme biologis ke dalam ultranasionalisme.',
-  },
-  {
-    id: 13,
-    q: 'Ciri fasisme yang menonjolkan superioritas bangsa/negara di atas individu disebut?',
-    opts: ['Ultranasionalisme', 'Internasionalisme', 'Federalisme', 'Egalitarianisme'],
-    correct: 0,
-    why: 'Fasisme menempatkan kepentingan dan kejayaan bangsa/negara di atas segala kebebasan individu.',
-  },
-  {
-    id: 14,
-    q: 'Fasisme umumnya menolak keras sistem pemerintahan berupa?',
-    opts: ['Monarki', 'Demokrasi liberal/parlementer', 'Kediktatoran', 'Militerisme'],
-    correct: 1,
-    why: 'Fasisme menganggap demokrasi liberal lemah dan memecah belah persatuan nasional.',
-  },
-  {
-    id: 15,
-    q: "Tokoh yang menulis 'The Wealth of Nations' (1776) dan dianggap bapak ekonomi kapitalisme?",
-    opts: ['Adam Smith', 'John Maynard Keynes', 'David Ricardo', 'Thomas Malthus'],
-    correct: 0,
-    why: "Adam Smith meletakkan dasar ekonomi pasar bebas lewat bukunya 'The Wealth of Nations'.",
-  },
-  {
-    id: 16,
-    q: "Konsep 'tangan tak terlihat' (invisible hand) dalam kapitalisme dikemukakan oleh?",
-    opts: ['Karl Marx', 'Adam Smith', 'Vladimir Lenin', 'Benito Mussolini'],
-    correct: 1,
-    why: "Adam Smith mengemukakan bahwa mekanisme pasar bekerja secara alami mengatur pasokan dan harga bagai 'tangan tak terlihat'.",
-  },
-  {
-    id: 17,
-    q: 'Dalam kapitalisme, alat produksi umumnya dimiliki oleh?',
-    opts: ['Negara secara mutlak', 'Swasta / individu', 'Komite militer', 'Partai tunggal'],
-    correct: 1,
-    why: 'Kapitalisme bertumpu pada hak milik pribadi dan inisiatif usaha swasta untuk mencari profit.',
-  },
-  {
-    id: 18,
-    q: 'Peristiwa sejarah abad 18-19 yang mempercepat berkembangnya kapitalisme industri di Eropa?',
-    opts: ['Revolusi Industri', 'Revolusi Hijau', 'Revolusi Prancis', 'Revolusi Rusia'],
-    correct: 0,
-    why: 'Revolusi Industri di Inggris mendorong otomatisasi pabrik, akumulasi modal, dan sistem upah modern.',
-  },
-  {
-    id: 19,
-    q: 'Negara adidaya yang menjadi simbol utama kapitalisme dan ekonomi pasar bebas di abad ke-20?',
-    opts: ['Kuba', 'Amerika Serikat', 'Korea Utara', 'Uni Soviet'],
-    correct: 1,
-    why: 'Amerika Serikat menjadi poros utama ekonomi kapitalis dunia terutama sepanjang era pasca Perang Dunia II.',
-  },
-  {
-    id: 20,
-    q: 'Ideologi mana yang paling menentang kepemilikan pribadi atas alat produksi pabrik dan tanah?',
-    opts: ['Liberalisme', 'Kapitalisme', 'Komunisme', 'Konservatisme'],
-    correct: 2,
-    why: 'Komunisme memandang kepemilikan pribadi atas alat produksi sebagai sumber utama eksploitasi manusia.',
-  },
-  {
-    id: 21,
-    q: 'Ideologi mana yang paling menekankan kultus individu pemimpin, militerisme, dan ekspansi wilayah?',
-    opts: ['Liberalisme', 'Fasisme', 'Kapitalisme', 'Sosialisme Demokratis'],
-    correct: 1,
-    why: 'Fasisme memuliakan kepatuhan buta pada figur pemimpin agung (Duce/Führer) dan kekuatan militer perang.',
-  },
-  {
-    id: 22,
-    q: 'Ideologi mana yang paling menjunjung kebebasan berpendapat, pers bebas, dan pemilu berkala?',
-    opts: ['Fasisme', 'Komunisme', 'Liberalisme', 'Totalitarianisme'],
-    correct: 2,
-    why: 'Pluralisme suara, keterbukaan pers, dan pemilu bebas adalah pilar utama masyarakat liberal.',
-  },
-  {
-    id: 23,
-    q: 'Ideologi mana yang memprioritaskan persaingan pasar bebas dengan peran regulasi negara seminimal mungkin?',
-    opts: ['Komunisme', 'Kapitalisme', 'Fasisme', 'Merkantilisme'],
-    correct: 1,
-    why: 'Kapitalisme (laissez-faire) meyakini kompetisi bebas adalah cara paling efisien dalam mengalokasikan sumber daya ekonomi.',
-  },
-  {
-    id: 24,
-    q: 'Perang Dingin (Cold War) merupakan rivalitas ideologi global antara blok Barat melawan blok Timur penganut paham?',
-    opts: ['Fasisme', 'Komunisme', 'Monarki Teokratis', 'Anarkisme'],
-    correct: 1,
-    why: 'Perang Dingin (1947–1991) mempertemukan blok Barat (AS-NATO) melawan blok komunis (Uni Soviet-Pakta Warsawa).',
-  },
-  {
-    id: 25,
-    q: 'Partai Nazi pimpinan Adolf Hitler di Jerman mulai resmi berkuasa pada tahun?',
-    opts: ['1917', '1933', '1939', '1945'],
-    correct: 1,
-    why: 'Hitler diangkat menjadi Kanselir Jerman pada Januari 1933, menandai dimulainya rezim Reich Ketiga.',
-  },
-  {
-    id: 26,
-    q: 'China di bawah kepemimpinan Mao Zedong mempraktikkan ideologi komunisme dengan varian khas yang disebut?',
-    opts: ['Kapitalisme Pasar', 'Fasisme Timur', 'Maoisme', 'Liberalisme Asia'],
-    correct: 2,
-    why: 'Maoisme menempatkan kaum tani desa sebagai ujung tombak revolusi sosialis, berbeda dari model buruh pabrik kota ala Lenin.',
-  },
-  {
-    id: 27,
-    q: 'Salah satu kritik paling umum terhadap sistem kapitalisme murni tanpa regulasi adalah?',
-    opts: ['Menghapuskan uang dan pasar', 'Memperlebar kesenjangan sosial dan ekonomi', 'Mewujudkan kesetaraan upah mutlak', 'Menghilangkan kepemilikan tanah'],
-    correct: 1,
-    why: 'Kritik utama kapitalisme adalah kecenderungan akumulasi kekayaan pada segelintir konglomerat dan timbulnya jurang ketimpangan.',
-  },
-  {
-    id: 28,
-    q: "Slogan Revolusi Prancis yang menginspirasi gerakan liberalisme adalah 'Liberté, Égalité, ...'?",
-    opts: ['Fraternité (Persaudaraan)', 'Propriété', 'Sécurité', 'Autorité'],
-    correct: 0,
-    why: 'Liberté, Égalité, Fraternité menjadi semboyan abadi Republik Prancis dan perjuangan hak-hak sipil.',
-  },
-  {
-    id: 29,
-    q: "Istilah ekonomi 'Laissez-faire' yang sering dikaitkan dengan kapitalisme memiliki arti harfiah?",
-    opts: ['Biarkan negara mengatur', 'Biarkan terjadi / jangan campur tangan', 'Bagi rata hasil kerja', 'Perdagangan dengan senjata'],
-    correct: 1,
-    why: "'Laissez-faire, laissez-passer' berarti biarkan pasar bergerak bebas tanpa intervensi pemerintah.",
-  },
-  {
-    id: 30,
-    q: 'Runtuhnya Tembok Berlin pada tahun 1989 menjadi simbol penting dari?',
-    opts: ['Kemenangan blok Fasis', 'Runtuhnya pengaruh komunisme di Eropa Timur', 'Awal mula Perang Dingin', 'Berakhirnya sistem demokrasi'],
-    correct: 1,
-    why: 'Tumbangnya Tembok Berlin menandai runtuhnya tirai besi komunisme di Eropa Timur dan reunifikasi Jerman.',
-  },
-  {
-    id: 31,
-    q: 'Simbol palu dan arit pada lambang komunisme melambangkan persatuan antara?',
-    opts: ['Buruh industri dan petani', 'Militer dan kaum cendekiawan', 'Pedagang dan pemilik modal', 'Birokrat dan agamawan'],
-    correct: 0,
-    why: 'Palu melambangkan kaum buruh pabrik perkotaan, dan arit melambangkan kaum petani pedesaan.',
-  },
-  {
-    id: 32,
-    q: 'Doktrin fasisme di Jerman yang menekankan perlunya ruang hidup (ekspansi wilayah) disebut?',
-    opts: ['Lebensraum', 'Perestroika', 'Glasnost', 'Blitzkrieg'],
-    correct: 0,
-    why: 'Lebensraum adalah konsep geopolitik Nazi untuk mencaplok wilayah Eropa Timur demi kelangsungan ras Arya.',
-  },
-
-  // ==================== SOAL BARU — LIBERALISME (33-47) ====================
-  {
     id: 33,
     q: "John Stuart Mill terkenal lewat karya 'On Liberty' yang membahas tentang?",
-    opts: ['Kebebasan individu dan batasnya', 'Perjuangan kelas', 'Negara totaliter', 'Ekonomi komando'],
+    opts: ['Batas kebebasan individu', 'Perjuangan kelas sosial', 'Kekuasaan negara totaliter', 'Sistem ekonomi komando'],
     correct: 0,
-    why: "Mill membahas sejauh mana kebebasan individu boleh dibatasi, terutama lewat 'harm principle'.",
+    why: "Mill membahas sejauh mana kebebasan individu boleh dibatasi, lewat prinsip yang kini dikenal sebagai 'harm principle'.",
   },
   {
     id: 34,
@@ -252,9 +55,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 36,
     q: 'Revolusi Inggris tahun 1688 yang menggulingkan raja tanpa banyak pertumpahan darah dan melahirkan Bill of Rights 1689 disebut?',
-    opts: ['Glorious Revolution', 'Revolusi Prancis', 'Revolusi Industri', 'Revolusi Puritan'],
+    opts: ['Revolusi Agung Inggris', 'Revolusi Prancis', 'Revolusi Industri', 'Revolusi Puritan'],
     correct: 0,
-    why: 'Glorious Revolution memperkuat kekuasaan parlemen atas raja dan menjadi tonggak liberalisme Inggris.',
+    why: "Dikenal juga sebagai 'Glorious Revolution', peristiwa ini memperkuat kekuasaan parlemen atas raja dan menjadi tonggak liberalisme Inggris.",
   },
   {
     id: 37,
@@ -280,23 +83,28 @@ export const QUESTIONS: Question[] = [
   {
     id: 40,
     q: 'Periode sejarah Indonesia 1950-1959 yang menerapkan sistem multipartai dan kabinet parlementer ala liberal dikenal sebagai era?',
-    opts: ['Demokrasi Terpimpin', 'Demokrasi Liberal/Parlementer', 'Orde Baru', 'Reformasi'],
+    opts: ['Demokrasi Terpimpin', 'Demokrasi Liberal', 'Orde Baru', 'Reformasi'],
     correct: 1,
-    why: 'Pada era ini Indonesia menganut sistem multipartai dengan pergantian kabinet yang sering terjadi.',
+    why: 'Pada era ini Indonesia menganut sistem multipartai dengan pergantian kabinet (kabinet parlementer) yang sering terjadi.',
   },
   {
     id: 41,
     q: "Mekanisme 'checks and balances' dalam sistem liberal bertujuan untuk?",
-    opts: ['Mempercepat pengambilan keputusan', 'Mencegah penyalahgunaan kekuasaan oleh satu lembaga', 'Menyatukan seluruh kekuasaan pada satu pemimpin', 'Menghapus lembaga yudikatif'],
+    opts: [
+      'Mempercepat seluruh pengambilan keputusan negara',
+      'Mencegah penyalahgunaan kekuasaan oleh satu lembaga',
+      'Menyatukan seluruh kekuasaan pada satu pemimpin',
+      'Menghapuskan keberadaan lembaga yudikatif negara',
+    ],
     correct: 1,
     why: 'Saling mengawasi antarlembaga negara mencegah satu pihak menjadi terlalu berkuasa.',
   },
   {
     id: 42,
     q: "Prinsip hukum 'habeas corpus' berfungsi melindungi warga negara dari?",
-    opts: ['Pajak yang tinggi', 'Penahanan sewenang-wenang tanpa proses hukum yang adil', 'Persaingan usaha', 'Sensor pers'],
+    opts: ['Pembebanan pajak yang tinggi', 'Penahanan tanpa proses hukum', 'Pembatasan persaingan usaha', 'Penerapan sensor pers ketat'],
     correct: 1,
-    why: 'Habeas corpus mewajibkan otoritas menghadirkan tahanan ke pengadilan dan menjelaskan alasan penahanannya.',
+    why: 'Habeas corpus mewajibkan otoritas menghadirkan tahanan ke pengadilan yang adil dan menjelaskan alasan penahanannya.',
   },
   {
     id: 43,
@@ -315,9 +123,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 45,
     q: 'Salah satu kritik umum terhadap liberalisme adalah kecenderungannya mengabaikan?',
-    opts: ['Kebebasan pers', 'Kesenjangan ekonomi dan keadilan sosial kolektif', 'Hak pilih warga', 'Supremasi hukum'],
+    opts: ['Kebebasan pers yang luas', 'Kesenjangan ekonomi dan sosial', 'Hak pilih seluruh warga', 'Supremasi hukum yang ketat'],
     correct: 1,
-    why: 'Kritik liberalisme klasik sering menyoroti minimnya perhatian pada pemerataan ekonomi.',
+    why: 'Kritik liberalisme klasik sering menyoroti minimnya perhatian pada pemerataan ekonomi dan keadilan sosial kolektif.',
   },
   {
     id: 46,
@@ -329,12 +137,52 @@ export const QUESTIONS: Question[] = [
   {
     id: 47,
     q: 'Liberalisme sosial (social liberalism) berbeda dari liberalisme klasik karena cenderung mendukung?',
-    opts: ['Penghapusan pemilu', 'Peran negara dalam jaminan sosial/kesejahteraan warga', 'Kepemilikan kolektif penuh atas tanah', 'Kediktatoran satu partai'],
+    opts: [
+      'Penghapusan seluruh sistem pemilu',
+      'Peran negara dalam kesejahteraan sosial',
+      'Kepemilikan kolektif penuh atas tanah',
+      'Kediktatoran penuh satu partai',
+    ],
     correct: 1,
-    why: 'Liberalisme sosial menerima peran negara lebih besar demi kesejahteraan tanpa meninggalkan kebebasan individu.',
+    why: 'Liberalisme sosial menerima peran negara lebih besar demi jaminan kesejahteraan tanpa meninggalkan kebebasan individu.',
   },
 
-  // ==================== SOAL BARU — KOMUNISME (48-62) ====================
+  // ==================== KOMUNISME (5-9, 48-62) ====================
+  {
+    id: 5,
+    q: 'Karl Marx dan Friedrich Engels menulis dokumen penting tahun 1848 yang berjudul?',
+    opts: ['The Wealth of Nations', 'Manifesto Komunis', 'Mein Kampf', 'The Social Contract'],
+    correct: 1,
+    why: 'Manifesto Komunis (1848) berisi seruan dan analisis perjuangan kelas antara kaum borjuis dan proletar.',
+  },
+  {
+    id: 6,
+    q: 'Konsep sentral Marx tentang konflik antara pemilik modal dan buruh disebut?',
+    opts: ['Perang saudara', 'Pertentangan kelas', 'Revolusi hijau', 'Kontrak sosial'],
+    correct: 1,
+    why: 'Marx memandang sejarah peradaban digerakkan oleh pertentangan kelas ekonomi.',
+  },
+  {
+    id: 7,
+    q: 'Negara pertama yang menerapkan komunisme setelah Revolusi 1917 adalah?',
+    opts: ['China', 'Kuba', 'Uni Soviet', 'Vietnam'],
+    correct: 2,
+    why: 'Revolusi Bolshevik Oktober 1917 melahirkan Uni Soviet (Rusia) sebagai negara sosialis/komunis pertama di dunia.',
+  },
+  {
+    id: 8,
+    q: 'Tokoh yang memimpin Revolusi Bolshevik 1917 di Rusia?',
+    opts: ['Joseph Stalin', 'Vladimir Lenin', 'Leon Trotsky', 'Nikita Khrushchev'],
+    correct: 1,
+    why: 'Vladimir Lenin memimpin faksi Bolshevik merebut kekuasaan dan mendirikan pemerintahan Soviet.',
+  },
+  {
+    id: 9,
+    q: 'Ciri utama ekonomi komunis adalah kepemilikan alat produksi berada di tangan?',
+    opts: ['Individu/swasta', 'Negara atau kolektif', 'Perusahaan multinasional', 'Investor asing'],
+    correct: 1,
+    why: 'Dalam komunisme, alat produksi dikuasai secara kolektif oleh negara untuk kesejahteraan bersama tanpa kelas.',
+  },
   {
     id: 48,
     q: 'Karya utama Karl Marx yang menganalisis kritik ekonomi kapitalisme secara mendalam berjudul?',
@@ -345,16 +193,16 @@ export const QUESTIONS: Question[] = [
   {
     id: 49,
     q: "Konsep 'materialisme historis' dalam pemikiran Marx menjelaskan bahwa perkembangan sejarah manusia digerakkan terutama oleh?",
-    opts: ['Agama', 'Kondisi dan hubungan ekonomi/produksi', 'Perang antarbangsa', 'Kehendak individu pemimpin'],
+    opts: ['Faktor agama dan kepercayaan', 'Kondisi hubungan ekonomi masyarakat', 'Peperangan antarbangsa yang berkelanjutan', 'Kehendak pribadi sang pemimpin'],
     correct: 1,
-    why: 'Marx melihat struktur ekonomi sebagai fondasi yang membentuk seluruh aspek sosial dan politik.',
+    why: 'Marx melihat struktur dan hubungan ekonomi/produksi sebagai fondasi yang membentuk seluruh aspek sosial dan politik.',
   },
   {
     id: 50,
     q: "Istilah 'diktator proletariat' dalam teori Marxis-Leninis merujuk pada?",
-    opts: ['Pemerintahan kelas buruh sebagai tahap transisi menuju masyarakat tanpa kelas', 'Kediktatoran satu jenderal militer', 'Kekuasaan mutlak kaum borjuis', 'Sistem kerajaan turun-temurun'],
+    opts: ['Pemerintahan transisi kelas buruh', 'Kediktatoran satu jenderal militer', 'Kekuasaan mutlak kaum borjuis', 'Sistem kerajaan turun-temurun'],
     correct: 0,
-    why: 'Tahap ini dianggap perlu untuk menghapus sisa kekuatan borjuis sebelum tercapainya masyarakat komunis penuh.',
+    why: 'Tahap pemerintahan kelas buruh ini dianggap perlu sebagai transisi untuk menghapus sisa kekuatan borjuis sebelum tercapainya masyarakat tanpa kelas.',
   },
   {
     id: 51,
@@ -366,9 +214,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 52,
     q: 'Program industrialisasi bertahap ala Uni Soviet di bawah Stalin yang terkenal disebut?',
-    opts: ['Marshall Plan', 'Rencana Lima Tahun (Five-Year Plan)', 'New Deal', 'Great Society'],
+    opts: ['Marshall Plan', 'Rencana Lima Tahun', 'New Deal', 'Great Society'],
     correct: 1,
-    why: 'Rencana Lima Tahun mempercepat industrialisasi Uni Soviet lewat target produksi terpusat.',
+    why: 'Rencana Lima Tahun (Five-Year Plan) mempercepat industrialisasi Uni Soviet lewat target produksi terpusat.',
   },
   {
     id: 53,
@@ -382,14 +230,14 @@ export const QUESTIONS: Question[] = [
     q: 'Ideologi resmi Korea Utara yang memadukan komunisme dengan penekanan kemandirian nasional disebut?',
     opts: ['Juche', 'Maoisme', 'Titoisme', 'Trotskyisme'],
     correct: 0,
-    why: "Juche menekankan kemandirian (self-reliance) sebagai prinsip utama negara Korea Utara.",
+    why: 'Juche menekankan kemandirian (self-reliance) sebagai prinsip utama negara Korea Utara.',
   },
   {
     id: 55,
     q: 'Organisasi internasional yang dibentuk untuk mengoordinasikan partai-partai komunis di berbagai negara disebut?',
-    opts: ['NATO', 'Komintern (Communist International)', 'Pakta Warsawa', 'SEATO'],
+    opts: ['NATO', 'Komintern', 'Pakta Warsawa', 'SEATO'],
     correct: 1,
-    why: 'Komintern didirikan untuk menyebarkan dan mengoordinasikan revolusi komunis dunia.',
+    why: "Komintern (Communist International) didirikan untuk menyebarkan dan mengoordinasikan revolusi komunis dunia.",
   },
   {
     id: 56,
@@ -401,9 +249,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 57,
     q: 'Kebijakan Mao Zedong di China akhir 1950-an yang bertujuan mempercepat industrialisasi lewat kolektivisasi pertanian secara drastis disebut?',
-    opts: ['Revolusi Kebudayaan', 'Lompatan Jauh ke Depan (Great Leap Forward)', 'Kebijakan Pintu Terbuka', 'Reformasi Deng Xiaoping'],
+    opts: ['Revolusi Kebudayaan', 'Lompatan Jauh ke Depan', 'Kebijakan Pintu Terbuka', 'Reformasi Deng Xiaoping'],
     correct: 1,
-    why: 'Kebijakan ini bertujuan mempercepat modernisasi China namun berujung pada bencana kelaparan besar.',
+    why: "Kebijakan bernama 'Great Leap Forward' ini bertujuan mempercepat modernisasi China namun berujung pada bencana kelaparan besar.",
   },
   {
     id: 58,
@@ -429,39 +277,74 @@ export const QUESTIONS: Question[] = [
   {
     id: 61,
     q: 'Salah satu ciri sistem ekonomi komunis dibanding kapitalis adalah tidak adanya?',
-    opts: ['Sekolah', 'Kepemilikan pribadi atas alat produksi utama', 'Militer', 'Uang tunai sama sekali dalam segala bentuk'],
+    opts: ['Sekolah dan lembaga pendidikan', 'Kepemilikan pribadi alat produksi', 'Angkatan militer dan pertahanan', 'Uang tunai dan alat tukar'],
     correct: 1,
     why: 'Komunisme meniadakan kepemilikan pribadi atas alat produksi besar demi kepemilikan kolektif/negara.',
   },
   {
     id: 62,
     q: 'Tujuan akhir cita-cita komunisme menurut Marx adalah terciptanya masyarakat?',
-    opts: ['Tanpa kelas dan tanpa negara', 'Monarki konstitusional', 'Federasi agama', 'Pasar bebas penuh'],
+    opts: ['Masyarakat tanpa kelas sosial', 'Monarki konstitusional turun-temurun', 'Federasi berbasis agama tunggal', 'Pasar bebas tanpa batas'],
     correct: 0,
-    why: 'Marx membayangkan tahap akhir sejarah sebagai masyarakat komunis yang egaliter tanpa kelas maupun aparatus negara.',
+    why: 'Marx membayangkan tahap akhir sejarah sebagai masyarakat komunis yang egaliter, tanpa kelas maupun aparatus negara.',
   },
 
-  // ==================== SOAL BARU — FASISME (63-77) ====================
+  // ==================== FASISME (10-14, 63-77) ====================
+  {
+    id: 10,
+    q: 'Fasisme modern pertama kali berkembang dan berkuasa di negara?',
+    opts: ['Jerman', 'Spanyol', 'Italia', 'Jepang'],
+    correct: 2,
+    why: 'Fasisme lahir di Italia pada 1920-an di bawah kepemimpinan Benito Mussolini.',
+  },
+  {
+    id: 11,
+    q: 'Tokoh yang memimpin gerakan fasisme di Italia?',
+    opts: ['Francisco Franco', 'Benito Mussolini', 'Adolf Hitler', 'Hirohito'],
+    correct: 1,
+    why: 'Benito Mussolini adalah pencetus istilah fasisme (fascio) dan penguasa fasis Italia.',
+  },
+  {
+    id: 12,
+    q: 'Bentuk fasisme yang berkembang di Jerman di bawah Adolf Hitler disebut?',
+    opts: ['Leninisme', 'Nazisme', 'Maoisme', 'Anarko-sindikalisme'],
+    correct: 1,
+    why: 'Nazisme (Nasional-Sosialisme) adalah varian fasisme Jerman yang menambahkan doktrin rasisme biologis ke dalam ultranasionalisme.',
+  },
+  {
+    id: 13,
+    q: 'Ciri fasisme yang menonjolkan superioritas bangsa/negara di atas individu disebut?',
+    opts: ['Ultranasionalisme', 'Internasionalisme', 'Federalisme', 'Egalitarianisme'],
+    correct: 0,
+    why: 'Fasisme menempatkan kepentingan dan kejayaan bangsa/negara di atas segala kebebasan individu.',
+  },
+  {
+    id: 14,
+    q: 'Fasisme umumnya menolak keras sistem pemerintahan berupa?',
+    opts: ['Monarki konstitusional', 'Demokrasi liberal', 'Kediktatoran militer', 'Militerisme negara'],
+    correct: 1,
+    why: 'Fasisme menganggap demokrasi liberal/parlementer lemah dan memecah belah persatuan nasional.',
+  },
   {
     id: 63,
     q: "Istilah 'fasisme' berasal dari kata Italia 'fascio' yang secara harfiah berarti?",
-    opts: ['Pedang', 'Ikatan/berkas batang kayu', 'Elang', 'Bendera'],
+    opts: ['Sebilah pedang', 'Berkas kayu terikat', 'Seekor elang', 'Selembar bendera'],
     correct: 1,
     why: "'Fascio' merujuk pada simbol Romawi kuno berupa berkas kayu yang diikat sebagai lambang kekuatan bersatu.",
   },
   {
     id: 64,
     q: 'Aksi politik Mussolini pada 1922 yang membawanya berkuasa di Italia disebut?',
-    opts: ['March on Rome (Pawai ke Roma)', 'Kristallnacht', 'Enabling Act', 'Anschluss'],
+    opts: ['March on Rome', 'Kristallnacht', 'Enabling Act', 'Anschluss'],
     correct: 0,
-    why: 'Pawai kaum fasis ke Roma memaksa Raja Victor Emmanuel III menunjuk Mussolini sebagai perdana menteri.',
+    why: "'March on Rome' (Pawai ke Roma) memaksa Raja Victor Emmanuel III menunjuk Mussolini sebagai perdana menteri.",
   },
   {
     id: 65,
     q: 'Undang-undang yang memberi Hitler kekuasaan darurat luar biasa di Jerman tahun 1933 disebut?',
-    opts: ['Nuremberg Laws', 'Enabling Act (Ermächtigungsgesetz)', 'Treaty of Versailles', 'Weimar Constitution'],
+    opts: ['Nuremberg Laws', 'Enabling Act', 'Treaty of Versailles', 'Weimar Constitution'],
     correct: 1,
-    why: 'Enabling Act memungkinkan Hitler membuat undang-undang tanpa persetujuan parlemen, membuka jalan ke kediktatoran.',
+    why: "'Enabling Act' (Ermächtigungsgesetz) memungkinkan Hitler membuat undang-undang tanpa persetujuan parlemen, membuka jalan ke kediktatoran.",
   },
   {
     id: 66,
@@ -494,16 +377,16 @@ export const QUESTIONS: Question[] = [
   {
     id: 70,
     q: 'Model ekonomi yang diterapkan rezim fasis, di mana negara mengatur kerja sama paksa antara pengusaha dan buruh dalam satu wadah tunggal disebut?',
-    opts: ['Korporatisme', 'Sosialisme pasar', 'Ekonomi komando penuh', 'Federalisme fiskal'],
+    opts: ['Korporatisme negara', 'Sosialisme pasar', 'Ekonomi komando', 'Federalisme fiskal'],
     correct: 0,
     why: 'Korporatisme fasis menyatukan kepentingan buruh dan pengusaha di bawah kendali negara, meniadakan serikat independen.',
   },
   {
     id: 71,
     q: 'Organisasi paramiliter Nazi yang berperan sebagai pasukan keamanan rezim dan pelaksana kebijakan rasial dikenal sebagai?',
-    opts: ['SS (Schutzstaffel)', 'NATO', 'Komintern', 'NKVD'],
+    opts: ['SS', 'NATO', 'Komintern', 'NKVD'],
     correct: 0,
-    why: 'SS menjadi salah satu instrumen kekerasan dan represi utama rezim Nazi.',
+    why: 'SS (Schutzstaffel) menjadi salah satu instrumen kekerasan dan represi utama rezim Nazi.',
   },
   {
     id: 72,
@@ -515,44 +398,79 @@ export const QUESTIONS: Question[] = [
   {
     id: 73,
     q: 'Aliansi tiga kekuatan fasis/militeris utama pada Perang Dunia II (Jerman-Italia-Jepang) dikenal sebagai?',
-    opts: ['Blok Sekutu', 'Poros (Axis Powers)', 'Blok Non-Blok', 'Entente'],
+    opts: ['Blok Sekutu', 'Blok Poros', 'Blok Non-Blok', 'Blok Entente'],
     correct: 1,
-    why: 'Jerman, Italia, dan Jepang membentuk Blok Poros yang berperang melawan Blok Sekutu.',
+    why: "Jerman, Italia, dan Jepang membentuk Blok Poros (Axis Powers) yang berperang melawan Blok Sekutu.",
   },
   {
     id: 74,
     q: 'Ciri fasisme yang menolak perdebatan/oposisi politik dan menuntut kepatuhan mutlak pada pemimpin tunggal disebut?',
-    opts: ['Kultus pemimpin (leader cult)', 'Federalisme', 'Bikameralisme', 'Referendum rutin'],
+    opts: ['Kultus pemimpin', 'Federalisme', 'Bikameralisme', 'Referendum rutin'],
     correct: 0,
-    why: 'Fasisme memuja sosok pemimpin tunggal (Duce/Führer) sebagai personifikasi kehendak bangsa.',
+    why: "Fasisme memuja sosok pemimpin tunggal ('leader cult', Duce/Führer) sebagai personifikasi kehendak bangsa.",
   },
   {
     id: 75,
     q: 'Simbol yang diadopsi Partai Nazi sebagai lambang gerakannya adalah?',
-    opts: ['Bintang merah', 'Swastika', 'Palu arit', 'Elang berkepala dua'],
+    opts: ['Bintang', 'Swastika', 'Palu-arit', 'Elang'],
     correct: 1,
     why: 'Swastika menjadi lambang resmi Partai Nazi dan negara Jerman di era Reich Ketiga.',
   },
   {
     id: 76,
     q: 'Fasisme umumnya ditempatkan pada spektrum politik mana oleh para ilmuwan politik?',
-    opts: ['Kiri jauh (far-left)', 'Kanan jauh (far-right) / ultranasionalis', 'Tengah/moderat', 'Anarkis'],
+    opts: ['Kiri jauh', 'Kanan jauh', 'Tengah moderat', 'Anarkis radikal'],
     correct: 1,
-    why: 'Penekanan pada hierarki, nasionalisme ekstrem, dan penolakan kesetaraan kelas menempatkan fasisme di kanan jauh.',
+    why: 'Penekanan pada hierarki, nasionalisme ekstrem (far-right/ultranasionalis), dan penolakan kesetaraan kelas menempatkan fasisme di kanan jauh.',
   },
   {
     id: 77,
     q: 'Salah satu alasan fasisme menolak komunisme secara ideologis adalah karena komunisme menekankan?',
-    opts: ['Perjuangan kelas internasional, bukan persatuan bangsa tunggal', 'Kebebasan pasar', 'Demokrasi liberal', 'Federalisme'],
+    opts: ['Perjuangan kelas internasional', 'Kebebasan pasar sepenuhnya', 'Demokrasi liberal parlementer', 'Federalisme kekuasaan daerah'],
     correct: 0,
-    why: 'Fasisme menganggap solidaritas kelas lintas negara ala komunisme mengancam persatuan nasional yang mereka agungkan.',
+    why: 'Fasisme menganggap solidaritas kelas lintas negara (bukan persatuan bangsa tunggal) ala komunisme mengancam nasionalisme yang mereka agungkan.',
   },
 
-  // ==================== SOAL BARU — KAPITALISME (78-92) ====================
+  // ==================== KAPITALISME (15-19, 78-92) ====================
+  {
+    id: 15,
+    q: "Tokoh yang menulis 'The Wealth of Nations' (1776) dan dianggap bapak ekonomi kapitalisme?",
+    opts: ['Adam Smith', 'John Maynard Keynes', 'David Ricardo', 'Thomas Malthus'],
+    correct: 0,
+    why: "Adam Smith meletakkan dasar ekonomi pasar bebas lewat bukunya 'The Wealth of Nations'.",
+  },
+  {
+    id: 16,
+    q: "Konsep 'tangan tak terlihat' (invisible hand) dalam kapitalisme dikemukakan oleh?",
+    opts: ['Karl Marx', 'Adam Smith', 'Vladimir Lenin', 'Benito Mussolini'],
+    correct: 1,
+    why: "Adam Smith mengemukakan bahwa mekanisme pasar bekerja secara alami mengatur pasokan dan harga bagai 'tangan tak terlihat'.",
+  },
+  {
+    id: 17,
+    q: 'Dalam kapitalisme, alat produksi umumnya dimiliki oleh?',
+    opts: ['Negara', 'Swasta atau individu', 'Komite militer', 'Partai tunggal'],
+    correct: 1,
+    why: 'Kapitalisme bertumpu pada hak milik pribadi dan inisiatif usaha swasta untuk mencari profit.',
+  },
+  {
+    id: 18,
+    q: 'Peristiwa sejarah abad 18-19 yang mempercepat berkembangnya kapitalisme industri di Eropa?',
+    opts: ['Revolusi Industri', 'Revolusi Hijau', 'Revolusi Prancis', 'Revolusi Rusia'],
+    correct: 0,
+    why: 'Revolusi Industri di Inggris mendorong otomatisasi pabrik, akumulasi modal, dan sistem upah modern.',
+  },
+  {
+    id: 19,
+    q: 'Negara adidaya yang menjadi simbol utama kapitalisme dan ekonomi pasar bebas di abad ke-20?',
+    opts: ['Kuba', 'Amerika Serikat', 'Korea Utara', 'Uni Soviet'],
+    correct: 1,
+    why: 'Amerika Serikat menjadi poros utama ekonomi kapitalis dunia terutama sepanjang era pasca Perang Dunia II.',
+  },
   {
     id: 78,
     q: 'Perusahaan dagang seperti VOC (Belanda) dan East India Company (Inggris) pada abad ke-17 sering dianggap sebagai bentuk awal dari?',
-    opts: ['Sosialisme negara', 'Kapitalisme merkantilis/korporasi awal', 'Komunisme primitif', 'Fasisme kolonial'],
+    opts: ['Sosialisme negara awal', 'Kapitalisme merkantilis awal', 'Komunisme primitif kuno', 'Fasisme kolonial awal'],
     correct: 1,
     why: 'Perusahaan-perusahaan dagang ini mengumpulkan modal dari investor swasta untuk mencari keuntungan, cikal bakal korporasi modern.',
   },
@@ -566,9 +484,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 80,
     q: 'Krisis ekonomi global yang dipicu jatuhnya pasar saham Wall Street pada tahun 1929 dikenal sebagai awal dari?',
-    opts: ['Perang Dingin', 'Depresi Besar (Great Depression)', 'Revolusi Industri', 'Krisis Minyak'],
+    opts: ['Perang Dingin', 'Depresi Besar', 'Revolusi Industri', 'Krisis Minyak'],
     correct: 1,
-    why: 'Depresi Besar menyebabkan pengangguran massal dan keruntuhan ekonomi di banyak negara kapitalis pada 1930-an.',
+    why: "Depresi Besar (Great Depression) menyebabkan pengangguran massal dan keruntuhan ekonomi di banyak negara kapitalis pada 1930-an.",
   },
   {
     id: 81,
@@ -587,9 +505,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 83,
     q: 'Istilah untuk perusahaan yang beroperasi dan memiliki aset produksi di banyak negara sekaligus, ciri khas kapitalisme global modern, disebut?',
-    opts: ['Koperasi lintas negara', 'Perusahaan multinasional (MNC)', 'BUMN internasional', 'Kolektif buruh dunia'],
+    opts: ['Koperasi lintas negara', 'Perusahaan multinasional besar', 'BUMN lintas negara', 'Kolektif buruh dunia'],
     correct: 1,
-    why: 'Perusahaan multinasional memperluas jangkauan modal dan produksi kapitalis ke seluruh dunia.',
+    why: 'Perusahaan multinasional (MNC) memperluas jangkauan modal dan produksi kapitalis ke seluruh dunia.',
   },
   {
     id: 84,
@@ -608,60 +526,151 @@ export const QUESTIONS: Question[] = [
   {
     id: 86,
     q: 'Sistem ekonomi campuran di mana negara tetap memainkan peran besar dalam mengatur pasar (bukan laissez-faire murni) sering disebut?',
-    opts: ['Ekonomi komando penuh', 'Kapitalisme negara/ekonomi campuran', 'Feodalisme', 'Barter murni'],
+    opts: ['Ekonomi komando', 'Kapitalisme campuran', 'Sistem feodalisme', 'Sistem barter'],
     correct: 1,
     why: 'Banyak negara kapitalis modern mengombinasikan pasar bebas dengan regulasi dan jaminan sosial negara.',
   },
   {
     id: 87,
     q: "Istilah 'kroniisme' (crony capitalism) merujuk pada praktik kapitalisme yang menyimpang karena?",
-    opts: ['Kedekatan pengusaha dengan pejabat memberi keuntungan tidak adil', 'Persaingan pasar yang terlalu ketat', 'Kepemilikan negara penuh atas industri', 'Tidak adanya uang dalam sistem ekonomi'],
+    opts: ['Kedekatan pengusaha dengan pejabat negara', 'Persaingan pasar yang terlalu ketat', 'Kepemilikan negara penuh atas industri', 'Tidak adanya uang dalam ekonomi'],
     correct: 0,
-    why: 'Crony capitalism terjadi ketika keberhasilan usaha lebih ditentukan oleh koneksi politik ketimbang persaingan sehat.',
+    why: 'Crony capitalism terjadi ketika keberhasilan usaha lebih ditentukan oleh koneksi politik ketimbang persaingan sehat, memberi keuntungan tidak adil.',
   },
   {
     id: 88,
     q: 'Bursa saham yang menjadi pusat utama kapitalisme finansial dunia dan berlokasi di New York disebut?',
-    opts: ['Wall Street (NYSE)', 'Nikkei', 'Bursa Efek Indonesia', 'FTSE London'],
+    opts: ['Wall Street', 'Nikkei', 'Bursa Efek Indonesia', 'FTSE London'],
     correct: 0,
-    why: 'Wall Street/New York Stock Exchange menjadi simbol pusat keuangan dan modal kapitalisme global.',
+    why: 'Wall Street (New York Stock Exchange/NYSE) menjadi simbol pusat keuangan dan modal kapitalisme global.',
   },
   {
     id: 89,
     q: "Konsep 'standar emas' (gold standard) dalam sejarah kapitalisme berfungsi sebagai?",
-    opts: ['Dasar nilai tukar mata uang yang diikat pada cadangan emas', 'Sistem barter langsung', 'Pajak atas barang impor', 'Alat propaganda politik'],
+    opts: ['Nilai mata uang terikat emas', 'Sistem barter langsung tanpa uang', 'Pajak tinggi atas barang impor', 'Alat propaganda politik pemerintah'],
     correct: 0,
-    why: 'Standar emas mengaitkan nilai mata uang suatu negara dengan cadangan emas yang dimilikinya.',
+    why: 'Standar emas mengaitkan nilai tukar mata uang suatu negara dengan cadangan emas yang dimilikinya.',
   },
   {
     id: 90,
     q: 'Fenomena ekonomi global akhir abad ke-20 yang mempercepat aliran modal, barang, dan tenaga kerja antarnegara, erat kaitannya dengan ekspansi kapitalisme, disebut?',
-    opts: ['Globalisasi', 'Isolasionisme', 'Autarki', 'Proteksionisme total'],
+    opts: ['Globalisasi ekonomi', 'Isolasionisme total', 'Autarki nasional', 'Proteksionisme penuh'],
     correct: 0,
     why: 'Globalisasi mempercepat integrasi pasar dan produksi kapitalis lintas batas negara.',
   },
   {
     id: 91,
     q: 'Model ekonomi hybrid China modern yang menggabungkan kontrol politik satu partai komunis dengan mekanisme pasar bebas sering disebut?',
-    opts: ['Sosialisme pasar / kapitalisme negara ala China', 'Fasisme ekonomi', 'Liberalisme murni', 'Feodalisme modern'],
+    opts: ['Sosialisme pasar ala China', 'Fasisme ekonomi negara', 'Liberalisme murni penuh', 'Feodalisme ekonomi modern'],
     correct: 0,
-    why: 'China mengombinasikan kendali politik Partai Komunis dengan mekanisme pasar untuk mendorong pertumbuhan ekonomi.',
+    why: 'China mengombinasikan kendali politik Partai Komunis dengan mekanisme pasar (sering disebut juga "kapitalisme negara") untuk mendorong pertumbuhan ekonomi.',
   },
   {
     id: 92,
     q: 'Salah satu argumen utama pembela kapitalisme adalah sistem ini dianggap paling efisien dalam?',
-    opts: ['Mengalokasikan sumber daya lewat mekanisme harga dan persaingan', 'Menghapus seluruh kesenjangan sosial', 'Menjamin kepemilikan bersama', 'Menghilangkan kebutuhan akan uang'],
+    opts: ['Mengalokasikan sumber daya secara efisien', 'Menghapus seluruh kesenjangan sosial ekonomi', 'Menjamin kepemilikan bersama atas aset', 'Menghilangkan kebutuhan akan uang tunai'],
     correct: 0,
-    why: 'Pembela kapitalisme meyakini harga pasar dan kompetisi mendorong efisiensi produksi dan inovasi.',
+    why: 'Pembela kapitalisme meyakini harga pasar dan persaingan mendorong efisiensi alokasi sumber daya, produksi, dan inovasi.',
   },
 
-  // ==================== SOAL BARU — PERBANDINGAN ANTAR-IDEOLOGI (93-99) ====================
+  // ==================== PERBANDINGAN ANTAR-IDEOLOGI (20-32, 93-99) ====================
+  {
+    id: 20,
+    q: 'Ideologi mana yang paling menentang kepemilikan pribadi atas alat produksi pabrik dan tanah?',
+    opts: ['Liberalisme', 'Kapitalisme', 'Komunisme', 'Konservatisme'],
+    correct: 2,
+    why: 'Komunisme memandang kepemilikan pribadi atas alat produksi sebagai sumber utama eksploitasi manusia.',
+  },
+  {
+    id: 21,
+    q: 'Ideologi mana yang paling menekankan kultus individu pemimpin, militerisme, dan ekspansi wilayah?',
+    opts: ['Liberalisme', 'Fasisme', 'Kapitalisme', 'Sosialisme'],
+    correct: 1,
+    why: 'Fasisme memuliakan kepatuhan buta pada figur pemimpin agung (Duce/Führer) dan kekuatan militer perang.',
+  },
+  {
+    id: 22,
+    q: 'Ideologi mana yang paling menjunjung kebebasan berpendapat, pers bebas, dan pemilu berkala?',
+    opts: ['Fasisme', 'Komunisme', 'Liberalisme', 'Totalitarianisme'],
+    correct: 2,
+    why: 'Pluralisme suara, keterbukaan pers, dan pemilu bebas adalah pilar utama masyarakat liberal.',
+  },
+  {
+    id: 23,
+    q: 'Ideologi mana yang memprioritaskan persaingan pasar bebas dengan peran regulasi negara seminimal mungkin?',
+    opts: ['Komunisme', 'Kapitalisme', 'Fasisme', 'Merkantilisme'],
+    correct: 1,
+    why: 'Kapitalisme (laissez-faire) meyakini kompetisi bebas adalah cara paling efisien dalam mengalokasikan sumber daya ekonomi.',
+  },
+  {
+    id: 24,
+    q: 'Perang Dingin (Cold War) merupakan rivalitas ideologi global antara blok Barat melawan blok Timur penganut paham?',
+    opts: ['Fasisme', 'Komunisme', 'Teokrasi', 'Anarkisme'],
+    correct: 1,
+    why: 'Perang Dingin (1947–1991) mempertemukan blok Barat (AS-NATO) melawan blok komunis (Uni Soviet-Pakta Warsawa).',
+  },
+  {
+    id: 25,
+    q: 'Partai Nazi pimpinan Adolf Hitler di Jerman mulai resmi berkuasa pada tahun?',
+    opts: ['1917', '1933', '1939', '1945'],
+    correct: 1,
+    why: 'Hitler diangkat menjadi Kanselir Jerman pada Januari 1933, menandai dimulainya rezim Reich Ketiga.',
+  },
+  {
+    id: 26,
+    q: 'China di bawah kepemimpinan Mao Zedong mempraktikkan ideologi komunisme dengan varian khas yang disebut?',
+    opts: ['Trotskyisme', 'Titoisme', 'Maoisme', 'Stalinisme'],
+    correct: 2,
+    why: 'Maoisme menempatkan kaum tani desa sebagai ujung tombak revolusi sosialis, berbeda dari model buruh pabrik kota ala Lenin.',
+  },
+  {
+    id: 27,
+    q: 'Salah satu kritik paling umum terhadap sistem kapitalisme murni tanpa regulasi adalah?',
+    opts: ['Menghapuskan uang dan pasar', 'Memperlebar kesenjangan sosial dan ekonomi', 'Mewujudkan kesetaraan upah mutlak', 'Menghilangkan kepemilikan tanah'],
+    correct: 1,
+    why: 'Kritik utama kapitalisme adalah kecenderungan akumulasi kekayaan pada segelintir konglomerat dan timbulnya jurang ketimpangan.',
+  },
+  {
+    id: 28,
+    q: "Slogan Revolusi Prancis yang menginspirasi gerakan liberalisme adalah 'Liberté, Égalité, ...'?",
+    opts: ['Fraternité', 'Propriété', 'Sécurité', 'Autorité'],
+    correct: 0,
+    why: "'Liberté, Égalité, Fraternité' (persaudaraan) menjadi semboyan abadi Republik Prancis dan perjuangan hak-hak sipil.",
+  },
+  {
+    id: 29,
+    q: "Istilah ekonomi 'Laissez-faire' yang sering dikaitkan dengan kapitalisme memiliki arti harfiah?",
+    opts: ['Biarkan negara yang mengatur', 'Biarkan pasar bergerak bebas', 'Bagi rata seluruh hasil kerja', 'Berdagang memakai kekuatan senjata'],
+    correct: 1,
+    why: "'Laissez-faire, laissez-passer' berarti biarkan pasar bergerak bebas tanpa intervensi pemerintah.",
+  },
+  {
+    id: 30,
+    q: 'Runtuhnya Tembok Berlin pada tahun 1989 menjadi simbol penting dari?',
+    opts: ['Kemenangan blok Fasis', 'Runtuhnya komunisme Eropa Timur', 'Awal mula Perang Dingin', 'Berakhirnya sistem demokrasi'],
+    correct: 1,
+    why: 'Tumbangnya Tembok Berlin menandai runtuhnya tirai besi komunisme di Eropa Timur dan reunifikasi Jerman.',
+  },
+  {
+    id: 31,
+    q: 'Simbol palu dan arit pada lambang komunisme melambangkan persatuan antara?',
+    opts: ['Buruh industri dan petani', 'Militer dan kaum cendekiawan', 'Pedagang dan pemilik modal', 'Birokrat dan agamawan'],
+    correct: 0,
+    why: 'Palu melambangkan kaum buruh pabrik perkotaan, dan arit melambangkan kaum petani pedesaan.',
+  },
+  {
+    id: 32,
+    q: 'Doktrin fasisme di Jerman yang menekankan perlunya ruang hidup (ekspansi wilayah) disebut?',
+    opts: ['Lebensraum', 'Perestroika', 'Glasnost', 'Blitzkrieg'],
+    correct: 0,
+    why: 'Lebensraum adalah konsep geopolitik Nazi untuk mencaplok wilayah Eropa Timur demi kelangsungan ras Arya.',
+  },
   {
     id: 93,
     q: 'Ideologi manakah yang secara historis pernah menjadi sekutu sesama Blok Sekutu melawan fasisme pada Perang Dunia II meski secara ideologi saling bertentangan?',
-    opts: ['Liberalisme (AS/Inggris) dan Komunisme (Uni Soviet)', 'Fasisme dan Kapitalisme', 'Komunisme dan Fasisme', 'Liberalisme dan Fasisme'],
+    opts: ['Liberalisme dan Komunisme', 'Fasisme dan Kapitalisme', 'Komunisme dan Fasisme', 'Liberalisme dan Fasisme'],
     correct: 0,
-    why: 'Demi mengalahkan Blok Poros, negara-negara liberal-kapitalis dan Uni Soviet komunis bersekutu sementara pada PD II.',
+    why: 'Demi mengalahkan Blok Poros, negara-negara liberal-kapitalis (diwakili AS/Inggris) dan Uni Soviet komunis bersekutu sementara pada PD II.',
   },
   {
     id: 94,
@@ -672,17 +681,17 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: 95,
-    q: 'Ideologi mana yang secara ekonomi paling dekat/beririsan dengan kapitalisme, meski secara penekanan politiknya berbeda?',
-    opts: ['Liberalisme', 'Fasisme', 'Komunisme', 'Semua sama jauhnya'],
+    q: 'Ideologi mana yang secara ekonomi paling dekat/beririsan dengan kapitalisme, meski penekanan politiknya berbeda?',
+    opts: ['Liberalisme', 'Fasisme', 'Komunisme', 'Konservatisme'],
     correct: 0,
     why: 'Liberalisme klasik dan kapitalisme sama-sama menjunjung tinggi kebebasan pasar dan hak milik pribadi.',
   },
   {
     id: 96,
     q: 'Sistem partai yang umum dijumpai pada negara berideologi fasis maupun komunis totaliter adalah?',
-    opts: ['Sistem satu partai dominan/tunggal', 'Sistem multipartai penuh', 'Tanpa partai sama sekali', 'Partai berbasis agama saja'],
+    opts: ['Sistem satu partai', 'Sistem multipartai penuh', 'Tanpa partai sama sekali', 'Partai berbasis agama'],
     correct: 0,
-    why: 'Baik rezim fasis maupun komunis totaliter cenderung melarang oposisi dan hanya mengizinkan satu partai berkuasa.',
+    why: 'Baik rezim fasis maupun komunis totaliter cenderung melarang oposisi dan hanya mengizinkan satu partai dominan/tunggal berkuasa.',
   },
   {
     id: 97,
@@ -694,26 +703,42 @@ export const QUESTIONS: Question[] = [
   {
     id: 98,
     q: 'Perang Dingin dapat dilihat sebagai pertarungan sistem ekonomi antara kapitalisme (Blok Barat) melawan?',
-    opts: ['Fasisme (Blok Poros)', 'Komunisme/ekonomi komando (Blok Timur)', 'Feodalisme', 'Merkantilisme kolonial'],
+    opts: ['Fasisme', 'Komunisme', 'Feodalisme', 'Merkantilisme'],
     correct: 1,
-    why: 'Perang Dingin mempertentangkan ekonomi pasar bebas Blok Barat dengan ekonomi terencana Blok Timur.',
+    why: 'Perang Dingin mempertentangkan ekonomi pasar bebas Blok Barat dengan ekonomi terencana/komando Blok Timur.',
   },
   {
     id: 99,
     q: 'Keempat ideologi dunia ini (Liberalisme, Komunisme, Fasisme, Kapitalisme) umumnya lahir atau berkembang pesat sebagai respons besar-besaran terhadap perubahan sosial-ekonomi akibat?',
-    opts: ['Revolusi Industri dan modernisasi Eropa abad 18-20', 'Penemuan benua Amerika', 'Perang Salib', 'Zaman Batu'],
+    opts: ['Revolusi Industri Eropa', 'Penemuan benua Amerika', 'Perang Salib abad pertengahan', 'Zaman Batu purba'],
     correct: 0,
-    why: 'Industrialisasi, urbanisasi, dan pergolakan sosial abad 18-20 menjadi lahan subur bagi lahirnya keempat ideologi besar ini.',
+    why: 'Industrialisasi, urbanisasi, dan pergolakan sosial abad 18-20 (Revolusi Industri dan modernisasi Eropa) menjadi lahan subur bagi lahirnya keempat ideologi besar ini.',
   },
 ];
 
+/**
+ * Mengacak urutan opsi jawaban sebuah soal dan menyesuaikan index jawaban
+ * benarnya. WAJIB dipanggil setiap kali soal ditampilkan ke pemain — ini
+ * mencegah pemain menghafal/menebak pola posisi jawaban (mis. "jawaban
+ * benar selalu di opsi A/B") alih-alih benar-benar tahu materinya.
+ */
+export function shuffleQuestionOptions(question: Question): Question {
+  const indices = question.opts.map((_, i) => i);
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+  return {
+    ...question,
+    opts: indices.map((i) => question.opts[i]) as [string, string, string, string],
+    correct: indices.indexOf(question.correct),
+  };
+}
+
 export function getRandomQuestion(usedIds: number[] = []): Question {
   const available = QUESTIONS.filter((q) => !usedIds.includes(q.id));
-  if (available.length === 0) {
-    // Reset pool when all questions have been used
-    const randomIndex = Math.floor(Math.random() * QUESTIONS.length);
-    return QUESTIONS[randomIndex];
-  }
-  const randomIndex = Math.floor(Math.random() * available.length);
-  return available[randomIndex];
+  const pool = available.length === 0 ? QUESTIONS : available;
+  const randomIndex = Math.floor(Math.random() * pool.length);
+  // Selalu kembalikan versi ter-shuffle agar posisi jawaban benar tidak bisa ditebak dari pola.
+  return shuffleQuestionOptions(pool[randomIndex]);
 }
