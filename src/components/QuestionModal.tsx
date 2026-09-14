@@ -135,10 +135,18 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
                 <div className="flex items-center justify-between font-bold text-sm mb-2">
                   <div className="flex items-center gap-2">
                     <span className="text-base">
-                      {answered.isCorrect ? '🎯' : '❌'}
+                      {answered.isCorrect
+                        ? '🎯'
+                        : answered.chosenIndex === -1
+                        ? '🚨'
+                        : '❌'}
                     </span>
                     <span>
-                      {answered.isCorrect ? 'Jawaban Benar!' : 'Jawaban Salah!'}
+                      {answered.isCorrect
+                        ? 'Jawaban Benar!'
+                        : answered.chosenIndex === -1
+                        ? 'Ditinggalkan / Gugur!'
+                        : 'Jawaban Salah!'}
                     </span>
                   </div>
                   <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-black/40 border border-current">
@@ -147,6 +155,12 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
                       : `Mundur -${state.activeDice} Petak`}
                   </span>
                 </div>
+
+                {answered.chosenIndex === -1 && (
+                  <div className="text-xs font-semibold text-rose-300 py-1.5 px-2 rounded-lg bg-rose-950/60 border border-rose-700/60 mb-2">
+                    🚨 Anda beralih dari papan permainan saat pertanyaan aktif. Sesuai aturan anti-kecurangan, jawaban dibatalkan dan dinyatakan salah.
+                  </div>
+                )}
 
                 {/* Property Permission Status */}
                 <div className="text-xs flex items-center gap-1.5 font-medium py-1 px-2 rounded-lg bg-black/30 border border-white/5 mb-2">

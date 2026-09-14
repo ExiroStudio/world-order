@@ -10,7 +10,7 @@ export default function HomePage() {
   const [isRulesOpen, setIsRulesOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between p-4 sm:p-6 max-w-5xl mx-auto w-full">
+    <div className="min-h-screen flex flex-col p-4 sm:p-6 pb-12 max-w-5xl mx-auto w-full">
       {/* Header / Hero */}
       <header className="text-center pt-6 sm:pt-10 pb-6">
         <div className="inline-block px-3 py-1 rounded-full bg-[#c9a13b]/10 border border-[#c9a13b]/30 text-[#c9a13b] font-mono text-xs font-semibold uppercase tracking-widest mb-3">
@@ -86,11 +86,11 @@ export default function HomePage() {
       </main>
 
       {/* Ideology Showcase Cards */}
-      <section className="mt-6 pt-6 border-t border-[#3a4150]/60">
-        <h3 className="font-serif text-center font-bold text-lg text-[#f4ecd8] mb-4">
+      <section className="mt-8 sm:mt-12 pt-8  border-t border-[#3a4150]/60 mb-12 sm:mb-16">
+        <h3 className="font-serif text-center font-bold text-lg sm:text-xl text-[#f4ecd8] mb-6">
           4 Ideologi Besar Dunia & Kekuatan Khasnya
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {TEAMS_ORDER.map((id) => {
             const def = TEAM_DEFINITIONS[id];
             return (
@@ -99,10 +99,10 @@ export default function HomePage() {
                 style={{
                   background: `linear-gradient(160deg, ${def.colorHex}20 0%, #262b35 70%)`,
                 }}
-                className="p-3.5 rounded-xl border border-[#3a4150] shadow-sm flex flex-col justify-between"
+                className="p-4 rounded-xl border border-[#3a4150] shadow-sm flex flex-col justify-between hover:border-[#c9a13b]/40 transition-colors"
               >
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-1.5">
                     <span
                       className="w-3 h-3 rounded-full shrink-0"
                       style={{ backgroundColor: def.colorHex }}
@@ -111,10 +111,10 @@ export default function HomePage() {
                       {def.name}
                     </h4>
                   </div>
-                  <div className="text-[11px] text-[#9aa1ad] mb-2 font-medium">
+                  <div className="text-[11px] text-[#9aa1ad] mb-2.5 font-medium">
                     {def.role}
                   </div>
-                  <div className="text-[11px] text-[#c9a13b] font-bold mb-1">
+                  <div className="text-[11px] text-[#c9a13b] font-bold mb-1.5">
                     ✦ {def.perkName}
                   </div>
                   <p className="text-[11px] text-[#eae6da]/80 leading-relaxed">
@@ -128,8 +128,8 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="text-center text-xs text-[#9aa1ad] pt-10 pb-4">
-        World Order • Monopoli Ideologi Dunia • Kelompok 9
+      <footer className="w-full text-center text-xs text-[#9aa1ad] pt-8 pb-12 border-t border-[#3a4150]/40 mt-auto">
+        © 2026 Kelompok 9 — World Order • Monopoli Ideologi Dunia
       </footer>
 
       <RulesModal

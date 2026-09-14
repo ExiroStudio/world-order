@@ -116,7 +116,8 @@ export type ActionType =
   | 'ANSWER_QUESTION'
   | 'EXECUTE_MOVE'
   | 'BUY_COUNTRY'
-  | 'CONGRESS_CHOICE';
+  | 'CONGRESS_CHOICE'
+  | 'LEAVE_PENALTY';
 
 export interface GameAction {
   type: ActionType;

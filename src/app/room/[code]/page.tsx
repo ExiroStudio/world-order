@@ -15,6 +15,9 @@ import { BuyPrompt } from '@/components/BuyPrompt';
 import { CongressChoiceModal } from '@/components/CongressChoiceModal';
 import { EndGameModal } from '@/components/EndGameModal';
 import { GameLog } from '@/components/GameLog';
+import { LeaveConsequenceModal } from '@/components/LeaveConsequenceModal';
+import { useAntiCheat } from '@/hooks/useAntiCheat';
+import { calculateLeavePenalty } from '@/lib/gameEngine';
 
 function subscribeStorage(callback: () => void) {
   window.addEventListener('storage', callback);
@@ -187,6 +190,60 @@ export default function RoomPage({
       : null;
 
   const [isMoving, setIsMoving] = useState(false);
+  const [consequenceModal, setConsequenceModal] = useState<{
+    isOpen: boolean;
+    teamId: TeamId;
+    countryCount: number;
+    penaltyAmount: number;
+    wasInQuestionPhase: boolean;
+  }>({
+    isOpen: false,
+    teamId: 'liberalisme',
+    countryCount: 0,
+    penaltyAmount: 100,
+    wasInQuestionPhase: false,
+  });
+
+  // Anti-cheat: trigger penalty when active player leaves tab/window during their turn
+  useAntiCheat({
+    enabled: !!(
+      room?.status === 'playing' &&
+      isMyTurn &&
+      myTeamId &&
+      room.gameState &&
+      !room.gameState.gameOver
+    ),
+    onLeaveGame: () => {
+      if (
+        room?.status === 'playing' &&
+        isMyTurn &&
+        myTeamId &&
+        room.gameState &&
+        !room.gameState.gameOver
+      ) {
+        const { countryCount, penaltyAmount } = calculateLeavePenalty(
+          room.gameState,
+          myTeamId
+        );
+        const wasInQuestion =
+          room.gameState.phase === 'QUESTION' &&
+          !room.gameState.questionAnswered;
+
+        dispatchAction({
+          type: 'LEAVE_PENALTY',
+          teamId: myTeamId,
+        });
+
+        setConsequenceModal({
+          isOpen: true,
+          teamId: myTeamId,
+          countryCount,
+          penaltyAmount,
+          wasInQuestionPhase: wasInQuestion,
+        });
+      }
+    },
+  });
 
   if (loading) {
     return (
@@ -522,6 +579,17 @@ export default function RoomPage({
         onRestart={() => {
           router.push('/');
         }}
+      />
+
+      <LeaveConsequenceModal
+        isOpen={consequenceModal.isOpen}
+        teamId={consequenceModal.teamId}
+        countryCount={consequenceModal.countryCount}
+        penaltyAmount={consequenceModal.penaltyAmount}
+        wasInQuestionPhase={consequenceModal.wasInQuestionPhase}
+        onDismiss={() =>
+          setConsequenceModal((prev) => ({ ...prev, isOpen: false }))
+        }
       />
     </div>
   );

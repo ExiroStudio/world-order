@@ -6,6 +6,10 @@ import {
   executeMove,
   resolveBuyDecision,
   calculateNetWorth,
+  countOwnedCountries,
+  calculateLeavePenalty,
+  applyLeavePenalty,
+  processGameAction,
 } from '../gameEngine';
 import { GAME_CONFIG, TEAMS_ORDER } from '../gameConfig';
 import { TILES } from '../board';
@@ -180,5 +184,92 @@ describe('World Order - Game Engine', () => {
     expect(moved.teams.liberalisme.cash).toBe(
       GAME_CONFIG.STARTING_CASH + expectedRent + GAME_CONFIG.LIBERALISME_VISIT_BONUS
     );
+  });
+
+  describe('Anti-Cheat - Akibat Meninggalkan Permainan', () => {
+    it('should count only owned countries (not basis tiles)', () => {
+      const state = initGameState();
+      expect(countOwnedCountries(state, 'liberalisme')).toBe(0);
+
+      // Tile 1 is country (Britania Raya), Tile 3 is country (Prancis)
+      state.owners[1] = 'liberalisme';
+      state.owners[3] = 'liberalisme';
+      expect(countOwnedCountries(state, 'liberalisme')).toBe(2);
+
+      // Tile 4 is basis (Jerman) - should NOT count
+      state.owners[4] = 'liberalisme';
+      expect(countOwnedCountries(state, 'liberalisme')).toBe(2);
+    });
+
+    it('should calculate penalty of 100 x owned countries or min 100 if zero', () => {
+      const state = initGameState();
+      // 0 countries -> minimum 100
+      const p0 = calculateLeavePenalty(state, 'liberalisme');
+      expect(p0.countryCount).toBe(0);
+      expect(p0.penaltyAmount).toBe(100);
+
+      // 3 countries -> 300
+      state.owners[1] = 'liberalisme';
+      state.owners[2] = 'liberalisme';
+      state.owners[3] = 'liberalisme';
+      const p3 = calculateLeavePenalty(state, 'liberalisme');
+      expect(p3.countryCount).toBe(3);
+      expect(p3.penaltyAmount).toBe(300);
+    });
+
+    it('should deduct penalty from player and distribute stolen money to rival ideologies', () => {
+      const state = initGameState();
+      state.turnIndex = 0; // Liberalisme
+      // Give Liberalisme 2 countries ($200 penalty)
+      state.owners[1] = 'liberalisme';
+      state.owners[2] = 'liberalisme';
+
+      const initialOpponentCash = state.teams.komunisme.cash; // 1500
+      const penalized = applyLeavePenalty(state, 'liberalisme');
+
+      // Liberalisme loses 200
+      expect(penalized.teams.liberalisme.cash).toBe(GAME_CONFIG.STARTING_CASH - 200);
+
+      // 3 active opponents (komunisme, fasisme, kapitalisme) share 200 // 3 = 66 each
+      const expectedShare = Math.floor(200 / 3);
+      expect(penalized.teams.komunisme.cash).toBe(initialOpponentCash + expectedShare);
+      expect(penalized.teams.fasisme.cash).toBe(initialOpponentCash + expectedShare);
+      expect(penalized.teams.kapitalisme.cash).toBe(initialOpponentCash + expectedShare);
+
+      // Check log wording: "Anda meninggalkan permainan, para ideologi mulai mencuri dari anda"
+      expect(penalized.log[0].text).toContain(
+        'Anda meninggalkan permainan, para ideologi mulai mencuri dari anda'
+      );
+    });
+
+    it('should cancel and fail question if player leaves during QUESTION phase', () => {
+      const state = initGameState();
+      const rolled = rollDice(state, 3);
+      expect(rolled.phase).toBe('QUESTION');
+      expect(rolled.questionAnswered).toBeNull();
+
+      const penalized = applyLeavePenalty(rolled, 'liberalisme');
+      expect(penalized.questionAnswered).not.toBeNull();
+      expect(penalized.questionAnswered?.isCorrect).toBe(false);
+      expect(penalized.questionAnswered?.chosenIndex).toBe(-1);
+
+      // Moving pawn afterwards will force moving backwards because isCorrect is false
+      const moved = executeMove(penalized);
+      // Position 0 - 3 (wrapped) = 17
+      expect(moved.teams.liberalisme.position).toBe((0 - 3 + 20) % 20);
+    });
+
+    it('should process LEAVE_PENALTY action via processGameAction', () => {
+      const state = initGameState();
+      state.turnIndex = 0; // Liberalisme
+
+      const updated = processGameAction(state, {
+        type: 'LEAVE_PENALTY',
+        teamId: 'liberalisme',
+      });
+
+      expect(updated.teams.liberalisme.cash).toBe(GAME_CONFIG.STARTING_CASH - 100);
+      expect(updated.log[0].text).toContain('para ideologi mulai mencuri dari anda');
+    });
   });
 });
